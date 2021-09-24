@@ -5,12 +5,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hexo</title>
+    <title>ACM--概率 - Hexo</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="description" content="n个球放入m个盒子问题
+球相同，盒子不同，没有空盒子 n&amp;gt;=m
+插板法， C（n-1,m-1)
+
+球相同，盒子不同，可以有空盒子
+假设每个盒子已经有一个球，插板法 C（n+m-1,m-1)
+
+,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -30,120 +37,107 @@
     <span id="config-title" style="display:none">Hexo</span>
     <div id="loader"></div>
     
-<div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="//" title="首页" target="_blank" rel="noopener">首页</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/categories/" title="分类" target="_blank" rel="noopener">分类</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/tags/" title="标签" target="_blank" rel="noopener">标签</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/archives/" title="归档" target="_blank" rel="noopener">归档</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/about/" title="关于" target="_blank" rel="noopener">关于</a>
-        </li>
-        
-    </ul>
-	<span class="target"></span>
-	<center>
-	<div class="hitokoto">
-		<span class="typed" id="hitokoto" data-st="true"></span>
-	</div>
-	</center>
-	
-	<p class="footerlinks">
-		<a href="#" class="iconfont icon-null"></a>
-		
-            <a href="/" title="facebook" class="iconfont icon-facebook" target="_blank" rel="noopener"> </a>
-        
-            <a href="https://twitter.com/Ardcy99" title="twitter" class="iconfont icon-twitter" target="_blank" rel="noopener"> </a>
-        
-            <a href="https://github.com/Ardcy" title="github" class="iconfont icon-github" target="_blank" rel="noopener"> </a>
-        
-            <a href="/img/logo.png" title="wechat" class="iconfont icon-wechat" target="_blank" rel="noopener"> </a>
-        
-            <a href="mailto:zhjgtao@gmail.com" title="email" class="iconfont icon-email" target="_blank" rel="noopener"> </a>
-        
-		<a href="#" class="iconfont icon-null"></a>
-	</p>
-	
-    <p id="copyright">
-        &copy; 2021 John Doe.
-        <span> | </span>Powered by <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        <span> | </span>Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> by Fechin
-		
-		<span> | </span><a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">冀ICP备xxxxxxx号</a>
-		
-    </p>
-</div>
-
-<div id="container">
-    
-<div id="screen">
-    <div id="mark">
-        <div class="layer" data-depth="0.4">
-            <img src="/img/welcome-cover.jpg" id="cover" crossorigin="anonymous" width="1920" height="1080">
-        </div>
-    </div>
-    <div id="vibrant">
-        <svg viewBox="0 0 2880 1620" height="100%" preserveAspectRatio="xMaxYMax slice">
-            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
-        </svg>
-        <div></div>
-    </div>
-    <div id="header">
+<div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ACM--概率</h3>
+    <div class="social">
         <div>
-            <a class="image-logo" href="/"></a>
-			
-			<div class="iconfont icon-search switchsearch" href="/search/" title="搜索"></div>
-			
-            <div class="iconfont icon-menu switchmenu"></div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
         </div>
     </div>
-    
-    <div id="post0">
-        <p>九月 24, 2021</p>
-        <h2><a href="/2021/09/24/blog2/" title="1.29  Educational Codeforces Round 81" class="posttitle">1.29  Educational Codeforces Round 81</a></h2>
-        <p class="summary">A Display The Number题目描述数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最...</p>
-    </div>
-    
+    <div class="scrollbar"></div>
 </div>
 
-    <div id="primary">
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">ACM--概率</h1>
+        <div class="stuff">
+            <span>九月 24, 2021</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h4 id="n个球放入m个盒子问题"><a href="#n个球放入m个盒子问题" class="headerlink" title="n个球放入m个盒子问题"></a>n个球放入m个盒子问题</h4><ol>
+<li><p>球相同，盒子不同，没有空盒子 n&gt;=m</p>
+<p>插板法， C（n-1,m-1)</p>
+</li>
+<li><p>球相同，盒子不同，可以有空盒子</p>
+<p>假设每个盒子已经有一个球，插板法 C（n+m-1,m-1)</p>
+</li>
+<li><p>球不同，盒子相同，没有空盒子</p>
+<p> dp[n][m] = m * dp[n-1][m] + dp[n-1][m-1] 1 &lt;= m &lt; n</p>
+<p>第二类斯特林数</p>
+</li>
+<li><p>球不同，盒子相同，可以有空盒子</p>
+<p>第三种情况 枚举箱子的个数</p>
+</li>
+<li><p>球不同，盒子不同，没有空箱</p>
+<p>dp[n][m] * fac[m]</p>
+<p>dp[n][m] 指第三种情况， 因为球是不同的，盒子是相同的，给盒子定义顺序就好了</p>
+</li>
+<li><p>球不同，盒子不同，允许空箱，</p>
+<p>m的n次方</p>
+</li>
+<li><p>球相同，盒子相同，允许空箱。</p>
+<p>dp[n][m] = dp[n][m-1] + dp[n-m][m] n&gt;=m</p>
+<p>dp[n][m] = dp[n][m-1]  n &lt; m</p>
+<p>dp[k][1] = 1, dp[1][k] = 1,dp[0][k] = 1;</p>
+</li>
+<li><p>球相同，盒子相同，没有空箱子</p>
+<p>dp[n-m][m],dp同第7种情况， n&gt;=m</p>
+<p>0 n &lt; m</p>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
         
-<div class="post">
-    <a href="/2021/09/24/blog1/" title="ACM--概率">
-        <img src="/img/welcome-cover.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>九月 24, 2021</p>
-        <h3><a href="/2021/09/24/blog1/" title="ACM--概率" class="posttitle">ACM--概率</a></h3>
-        <p>n个球放入m个盒子问题
-球相同，盒子不同，没有空盒子 n&gt;=m
-插板法， C（n-1,m-1)
-
-球相同，盒子不同，可以有空盒子
-假设每个盒子已经有...</p>
-    </div>
-</div>
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o='Ardcy'
+        data-a='Ardcy'
+        data-d='false'
+    >查看评论</div>
 
 
     </div>
     
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#n%E4%B8%AA%E7%90%83%E6%94%BE%E5%85%A5m%E4%B8%AA%E7%9B%92%E5%AD%90%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">n个球放入m个盒子问题</span></a></li></ol>	
+        </div>
+    
 </div>
-<div id="preview"></div>
 
 
+    </div>
+</div>
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>

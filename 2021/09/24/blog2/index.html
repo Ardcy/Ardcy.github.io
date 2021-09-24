@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>1.29  Educational Codeforces Round 81 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="A Display The Number题目描述数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几
+题解对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    
+<div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">1.29  Educational Codeforces Round 81</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">1.29  Educational Codeforces Round 81</h1>
+        <div class="stuff">
+            <span>九月 24, 2021</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="A-Display-The-Number"><a href="#A-Display-The-Number" class="headerlink" title="A Display The Number"></a>A <a target="_blank" rel="noopener" href="https://codeforces.com/contest/1295/problem/A">Display The Number</a></h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几</p>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可</p>
+<h3 id="B-Infinite-Prefixes"><a href="#B-Infinite-Prefixes" class="headerlink" title="B Infinite Prefixes"></a>B <a target="_blank" rel="noopener" href="https://codeforces.com/contest/1295/problem/B">Infinite Prefixes</a></h3><h5 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h5><p>有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$</p>
+<h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>每一个串存在一个$u​$,即整串的前缀01差，无限前缀能组成的数字仅有前$n​$项前缀01差及无限u的叠加</p>
+<p>（注意考虑特殊条件） <del>不考虑就hack</del></p>
+<h3 id="C-Obtain-The-String"><a href="#C-Obtain-The-String" class="headerlink" title="C Obtain The String"></a>C <a target="_blank" rel="noopener" href="https://codeforces.com/contest/1295/problem/C">Obtain The String</a></h3><h5 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h5><p>有两个小写字母字符串$s$和$t$,定义操作：每次可将s的一个非连续子串取出，求最小的操作数$n$,可使得$n$次得到的子串连续成为字符串$t$</p>
+<h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>直接贪心，利用子序列自动机加速</p>
+<p>将26个字母保存1个$nex$二维数组，$nex_{ij}$表示第$s$在第$i$个位置后的字母$j $第一次出现的位置,我们在求解过程中：</p>
+<p>首先查找t的第一个字母在s中第一次出现的位置，即$nex_{0,t_1}$,找到第一个字母后，寻找t的第二个字母的过程就是在$s$中$t$的第一个字母的位置后继续寻找第一次出现第二个字母的位置，以此类推，若是找不到，则操作数++，重新寻找</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100005</span>],t[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> nxt[<span class="number">100005</span>][<span class="number">26</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> n=<span class="built_in">strlen</span>(s+<span class="number">1</span>),m=<span class="built_in">strlen</span>(t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[n][j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[i][j]=nxt[i+<span class="number">1</span>][j];</span><br><span class="line">            nxt[i][s[i+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>,ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">if</span>(!now)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                <span class="keyword">if</span>(!now)&#123;ans=<span class="number">-1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="D-Same-GCDs"><a href="#D-Same-GCDs" class="headerlink" title="D Same GCDs"></a>D <a target="_blank" rel="noopener" href="https://codeforces.com/contest/1295/problem/D">Same GCDs</a></h3><h5 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $</p>
+<h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>$gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$</p>
+<p>则原式可化为</p>
+<p>…</p>
+<p>直接求欧拉函数即可</p>
+<h3 id="E-Permutation-Separation"><a href="#E-Permutation-Separation" class="headerlink" title="E Permutation Separation"></a>E <a target="_blank" rel="noopener" href="https://codeforces.com/contest/1295/problem/E">Permutation Separation</a></h3><h5 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h5><p>给一个排列，每个排列中的第$i$个数字为$p_i$,权值为$w_i$.你可以选择一个位置切一刀把它分成左右两部分，然后你可以花费$w_i$把$p_i$移动到另一个部分。最终要保证左半部分的最大值小于右半部分的最小值。</p>
+<h5 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h5><p>基础还是太弱，看了半天题解感觉终于明白了</p>
+<p>首先暴力解法：就是枚举将左右集合分开的位置，然后枚举边界x,使得左边集合大于x的数与右边集合小于x的数花费和最小</p>
+<p>线段树解法：</p>
+<p>线段树是将枚举的边界x作为叶子节点的</p>
+<p>如果能够确定切的位置  左边集合与右边集合均已经确定，每一个叶子节点x保存的是当前集合下以x为边界所需花费，由于线段树维护的是最小值，全局最小值就是当前确定集合的最小花费。</p>
+<p>如何更新：</p>
+<p>当集合发生改变时，比如说左边集合中新增了右边集合的$y$,权值为$w$,则当前集合下的最优解法中的以比y小的边界均需要将y移动到右边,区间增加$w$，比y大的边界则会略去这一步骤，即区间减去$w$</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o='Ardcy'
+        data-a='Ardcy'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-Display-The-Number"><span class="toc-number">1.</span> <span class="toc-text">A Display The Number</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.0.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">1.0.2.</span> <span class="toc-text">题解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Infinite-Prefixes"><span class="toc-number">2.</span> <span class="toc-text">B Infinite Prefixes</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="toc-number">2.0.2.</span> <span class="toc-text">题解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Obtain-The-String"><span class="toc-number">3.</span> <span class="toc-text">C Obtain The String</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.0.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-2"><span class="toc-number">3.0.2.</span> <span class="toc-text">题解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-Same-GCDs"><span class="toc-number">4.</span> <span class="toc-text">D Same GCDs</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><span class="toc-number">4.0.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-3"><span class="toc-number">4.0.2.</span> <span class="toc-text">题解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E-Permutation-Separation"><span class="toc-number">5.</span> <span class="toc-text">E Permutation Separation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-4"><span class="toc-number">5.0.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">题解</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
