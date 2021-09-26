@@ -102,6 +102,44 @@
 <h3 id="1-2-计算机网络体系结构与参考模型"><a href="#1-2-计算机网络体系结构与参考模型" class="headerlink" title="1.2 计算机网络体系结构与参考模型"></a>1.2 计算机网络体系结构与参考模型</h3><h2 id="第二章-物理层"><a href="#第二章-物理层" class="headerlink" title="第二章 物理层"></a>第二章 物理层</h2><h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>]]></content>
   </entry>
   <entry>
+    <title>git 学习笔记</title>
+    <url>/2021/09/26/blog6/</url>
+    <content><![CDATA[<p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
+<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
+
+
+<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
+<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
+
+
+<p><strong>Ans</strong>: 参考<a href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
+<p>合并多个commit的情景可分为以下两种情况：</p>
+<ul>
+<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
+</li>
+<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
+</li>
+</ul>
+<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
+
+<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
+<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
+<ol>
+<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
+</li>
+<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
+</li>
+<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
+</li>
+</ol>
+<blockquote>
+<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
+</blockquote>
+<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
+]]></content>
+  </entry>
+  <entry>
     <title>markdown 从基础使用到进阶</title>
     <url>/2021/09/25/blog5/</url>
     <content><![CDATA[<blockquote>
@@ -859,44 +897,6 @@
     </tbody>
 </table>
 </div>
-]]></content>
-  </entry>
-  <entry>
-    <title>git 学习笔记</title>
-    <url>/2021/09/26/blog6/</url>
-    <content><![CDATA[<p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
-
-
-<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
-
-
-<p><strong>Ans</strong>: 参考<a href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
-<p>合并多个commit的情景可分为以下两种情况：</p>
-<ul>
-<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
-</li>
-<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
-</li>
-</ul>
-<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
-
-<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
-<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
-<ol>
-<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
-</li>
-<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
-</li>
-<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
-</li>
-</ol>
-<blockquote>
-<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
-</blockquote>
-<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
 ]]></content>
   </entry>
 </search>
