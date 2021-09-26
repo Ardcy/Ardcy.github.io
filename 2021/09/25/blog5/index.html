@@ -1,131 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>ACM--概率</title>
-    <url>/2021/09/24/blog1/</url>
-    <content><![CDATA[<h4 id="n个球放入m个盒子问题"><a href="#n个球放入m个盒子问题" class="headerlink" title="n个球放入m个盒子问题"></a>n个球放入m个盒子问题</h4><ol>
-<li><p>球相同，盒子不同，没有空盒子 n&gt;=m</p>
-<p>插板法， C（n-1,m-1)</p>
-</li>
-<li><p>球相同，盒子不同，可以有空盒子</p>
-<p>假设每个盒子已经有一个球，插板法 C（n+m-1,m-1)</p>
-</li>
-<li><p>球不同，盒子相同，没有空盒子</p>
-<p> dp[n][m] = m * dp[n-1][m] + dp[n-1][m-1] 1 &lt;= m &lt; n</p>
-<p>第二类斯特林数</p>
-</li>
-<li><p>球不同，盒子相同，可以有空盒子</p>
-<p>第三种情况 枚举箱子的个数</p>
-</li>
-<li><p>球不同，盒子不同，没有空箱</p>
-<p>dp[n][m] * fac[m]</p>
-<p>dp[n][m] 指第三种情况， 因为球是不同的，盒子是相同的，给盒子定义顺序就好了</p>
-</li>
-<li><p>球不同，盒子不同，允许空箱，</p>
-<p>m的n次方</p>
-</li>
-<li><p>球相同，盒子相同，允许空箱。</p>
-<p>dp[n][m] = dp[n][m-1] + dp[n-m][m] n&gt;=m</p>
-<p>dp[n][m] = dp[n][m-1]  n &lt; m</p>
-<p>dp[k][1] = 1, dp[1][k] = 1,dp[0][k] = 1;</p>
-</li>
-<li><p>球相同，盒子相同，没有空箱子</p>
-<p>dp[n-m][m],dp同第7种情况， n&gt;=m</p>
-<p>0 n &lt; m</p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>1.29  Educational Codeforces Round 81</title>
-    <url>/2021/09/24/blog2/</url>
-    <content><![CDATA[<h3 id="A-Display-The-Number"><a href="#A-Display-The-Number" class="headerlink" title="A Display The Number"></a>A <a href="https://codeforces.com/contest/1295/problem/A">Display The Number</a></h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几</p>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可</p>
-<h3 id="B-Infinite-Prefixes"><a href="#B-Infinite-Prefixes" class="headerlink" title="B Infinite Prefixes"></a>B <a href="https://codeforces.com/contest/1295/problem/B">Infinite Prefixes</a></h3><h5 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h5><p>有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$</p>
-<h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>每一个串存在一个$u​$,即整串的前缀01差，无限前缀能组成的数字仅有前$n​$项前缀01差及无限u的叠加</p>
-<p>（注意考虑特殊条件） <del>不考虑就hack</del></p>
-<h3 id="C-Obtain-The-String"><a href="#C-Obtain-The-String" class="headerlink" title="C Obtain The String"></a>C <a href="https://codeforces.com/contest/1295/problem/C">Obtain The String</a></h3><h5 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h5><p>有两个小写字母字符串$s$和$t$,定义操作：每次可将s的一个非连续子串取出，求最小的操作数$n$,可使得$n$次得到的子串连续成为字符串$t$</p>
-<h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>直接贪心，利用子序列自动机加速</p>
-<p>将26个字母保存1个$nex$二维数组，$nex_{ij}$表示第$s$在第$i$个位置后的字母$j $第一次出现的位置,我们在求解过程中：</p>
-<p>首先查找t的第一个字母在s中第一次出现的位置，即$nex_{0,t_1}$,找到第一个字母后，寻找t的第二个字母的过程就是在$s$中$t$的第一个字母的位置后继续寻找第一次出现第二个字母的位置，以此类推，若是找不到，则操作数++，重新寻找</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100005</span>],t[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> nxt[<span class="number">100005</span>][<span class="number">26</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> n=<span class="built_in">strlen</span>(s+<span class="number">1</span>),m=<span class="built_in">strlen</span>(t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[n][j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[i][j]=nxt[i+<span class="number">1</span>][j];</span><br><span class="line">            nxt[i][s[i+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>,ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">if</span>(!now)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                <span class="keyword">if</span>(!now)&#123;ans=<span class="number">-1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>markdown 从基础使用到进阶 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="
+是什么，为什么，如何做？
 
-<h3 id="D-Same-GCDs"><a href="#D-Same-GCDs" class="headerlink" title="D Same GCDs"></a>D <a href="https://codeforces.com/contest/1295/problem/D">Same GCDs</a></h3><h5 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $</p>
-<h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>$gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$</p>
-<p>则原式可化为</p>
-<p>…</p>
-<p>直接求欧拉函数即可</p>
-<h3 id="E-Permutation-Separation"><a href="#E-Permutation-Separation" class="headerlink" title="E Permutation Separation"></a>E <a href="https://codeforces.com/contest/1295/problem/E">Permutation Separation</a></h3><h5 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h5><p>给一个排列，每个排列中的第$i$个数字为$p_i$,权值为$w_i$.你可以选择一个位置切一刀把它分成左右两部分，然后你可以花费$w_i$把$p_i$移动到另一个部分。最终要保证左半部分的最大值小于右半部分的最小值。</p>
-<h5 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h5><p>基础还是太弱，看了半天题解感觉终于明白了</p>
-<p>首先暴力解法：就是枚举将左右集合分开的位置，然后枚举边界x,使得左边集合大于x的数与右边集合小于x的数花费和最小</p>
-<p>线段树解法：</p>
-<p>线段树是将枚举的边界x作为叶子节点的</p>
-<p>如果能够确定切的位置  左边集合与右边集合均已经确定，每一个叶子节点x保存的是当前集合下以x为边界所需花费，由于线段树维护的是最小值，全局最小值就是当前确定集合的最小花费。</p>
-<p>如何更新：</p>
-<p>当集合发生改变时，比如说左边集合中新增了右边集合的$y$,权值为$w$,则当前集合下的最优解法中的以比y小的边界均需要将y移动到右边,区间增加$w$，比y大的边界则会略去这一步骤，即区间减去$w$</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>通货膨胀杂谈</title>
-    <url>/2021/09/24/blog3/</url>
-    <content><![CDATA[<p>​    </p>
-<p>先来考虑一个基本的问题，什么是通货膨胀？如何定义通货膨胀？由此可以延伸出很多新的问题。</p>
-<p>通货膨胀，是指经济运行中出现的全面、持续的物价上涨的现象。纸币发行量超过流通中实际需要的货币量，是导致通货膨胀的主要原因之一；通货紧缩，是与通货膨胀相反的一种经济现象。它表现为物价全面持续下跌，通常伴随着经济衰退出现。 </p>
-<ul>
-<li><p>个人理解</p>
-<p>通货膨胀是货币量发行过多，导致商品价格全面上涨的现象。</p>
-<p>可以由此思考哪些问题 ？ </p>
-<ul>
-<li>问题1： 货币量是否每一年都会发行 ？</li>
-<li>问题2： 货币量 流通 和 不流通 的影响有多少 ？</li>
-<li>问题3： 业主如何根据定商品价格？（是源于货币发行量过多么？</li>
-<li>问题4： 通货膨胀 会导致 不同的商品 涨价，那么这个幅度会共同涨比例类似的价格？还是会出现混乱的局面？</li>
-<li>GDP 增长，不发行货币 是不是就不会 出现通货膨胀的 局面 ？</li>
-<li>各个国家相互之间的货币会发生怎样的影响 ？</li>
-</ul>
-</li>
-</ul>
-<h4 id="消费者物价指数是什么？"><a href="#消费者物价指数是什么？" class="headerlink" title="消费者物价指数是什么？"></a>消费者物价指数是什么？</h4><p>消费者物价指数(Consumer Price Index)，英文缩写为CPI，是反映与居民生活有关的商品及劳务价格统计出来的物价变动指标，通常作为观察通货膨胀水平的重要指标。</p>
-<blockquote>
-<p>如果消费者物价指数升幅过大，表明通胀已经成为经济不稳定因素，央行会有紧缩货币政策和财政政策的风险，从而造成经济前景不明朗。因此，该指数过高的升幅往往不被市场欢迎。例如，在过去12个月，消费者物价指数上升2.3％，那表示，生活成本比12个月前平均上升2.3％。当生活成本提高，你的金钱价值便随之下降。也就是说，一年前收到的一张100元纸币，今日只可以买到价值97.75元的商品或服务。一般说来当CPI&gt;3%的增幅时我们称为Inflation，就是通货膨胀；而当CPI&gt;5%的增幅时，我们把它称为Serious Inflation，就是严重的通货膨胀。 </p>
-</blockquote>
-<h4 id="CPI-是如何计算的？"><a href="#CPI-是如何计算的？" class="headerlink" title="CPI 是如何计算的？"></a>CPI 是如何计算的？</h4><p>消费者价格指数(Consumer Price Index)，是对一个固定的消费品篮子价格的衡量，主要反映消费者支付商品和劳务的价格变化情况，也是一种度量通货膨胀水平的工具，以百分比变化为表达形式。在美国构成该指标的主要商品共分七大类，其中包括：食品、酒和饮品住宅；衣着；交通；医药健康；娱乐；其他商品及服务。在美国，消费物价指数由劳工统计局每月公布，有两种不同的消费物价指数。一是工人和职员的消费物价指数，简称CPI-W。二是城市消费者的消费物价指数，简称CPI-U。  </p>
-<h4 id="参考指标"><a href="#参考指标" class="headerlink" title="参考指标"></a>参考指标</h4><p>（CPI）是一个滞后性的数据，但它往往是市场经济活动与政府货币政策的一个重要参考指标。CPI稳定、就业充分及GDP增长往往是最重要的社会经济目标。不过，从中国的现实情况来看，CPI的稳定及其重要性并不像发达国家所认为的那样“有一定的权威性，市场的经济活动会根据CPI的变化来调整”。近几年来欧美国家GDP增长一直在2%左右波动，CPI也同样在0%～3%的范围内变化，而中国的情况则完全不同。首先是国内经济快速增长，近两年来GDP增长都在9%以上，CPI却没有多少波动，表面看来这可以说得上是“政府对经济运行调控自如，市场行为反映十分理性”。二是一年之内CPI大起大落，前后相差几个百分点；一般情况下，除非经济生活中有重大的突发事件（如1997年的亚洲金融危机），CPI是不可能大起大落的，所以2004年中国的CPI大幅波动有些异常。三是随着CPI大幅波动，国内经济一时间通货膨胀率过高，民众储蓄负利率严重，一时间居民储蓄又告别负收益，通货紧缩阴影重现。这样一种经济环境令人担忧，因此，如何理解CPI指数便成为一个十分重要的问题。  </p>
-<h4 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h4><p>CPI的计算公式是 CPI=（一组固定商品按当期价格计算的价值）除以（一组固定商品按基期期价格计算的价值）乘以100。 CPI告诉人们的是，对普通家庭的支出来说，购买具有代表性的一组商品，在今天要比过去某一时间多花费多少，例如，若1995年某国普通家庭每个月购买一组商品的费用为800元，而2000年购买这一组商品的费用为1000元，那么该国2000年的消费价格指数为（以1995年为基期）CPI= 1000/800<em>100=125，也就是说上涨了25%。在日常中我们更关心的是通货膨胀率，它被定义为从一个时期到另一个时期价格水平变动的百分比，公式为T=（P1—P0）/P0，式子中T为1时期的通货膨胀率，P1和P0分别表示1时期和0时期的价格水平。如果用上面介绍的消费价格指数来衡量价格水平，则通货膨胀率就是不同时期的消费价格指数变动的百分比。假如一个经济体的消费价格指数从去年的100增加到今年的112，那么这一时期的通货膨胀率就为 T=（112—100）/100</em>100%=12%，就是说通货膨胀率为12%，表现为物价上涨12%。  </p>
-<h5 id="货币是否每一年都会发行？"><a href="#货币是否每一年都会发行？" class="headerlink" title="货币是否每一年都会发行？"></a>货币是否每一年都会发行？</h5>]]></content>
-  </entry>
-  <entry>
-    <title>计算机网络学习笔记（一）</title>
-    <url>/2021/09/25/blog4/</url>
-    <content><![CDATA[<h2 id="第一章-计算机网络体系结构"><a href="#第一章-计算机网络体系结构" class="headerlink" title="第一章 计算机网络体系结构"></a>第一章 计算机网络体系结构</h2><h3 id="1-1-计算机网络概述"><a href="#1-1-计算机网络概述" class="headerlink" title="1.1 计算机网络概述"></a>1.1 计算机网络概述</h3><p><font color=#00FFFF> hello world </font></p>
-<h3 id="1-2-计算机网络体系结构与参考模型"><a href="#1-2-计算机网络体系结构与参考模型" class="headerlink" title="1.2 计算机网络体系结构与参考模型"></a>1.2 计算机网络体系结构与参考模型</h3><h2 id="第二章-物理层"><a href="#第二章-物理层" class="headerlink" title="第二章 物理层"></a>第二章 物理层</h2><h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>]]></content>
-  </entry>
-  <entry>
-    <title>markdown 从基础使用到进阶</title>
-    <url>/2021/09/25/blog5/</url>
-    <content><![CDATA[<blockquote>
+使用 markdown 的时间也快两年了，在此重新补充一些新的markdown使用技巧，以帮助自己能够更方便地撰写文档。
+通过使用三个星号建立一个分割线1***
+
+效果,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    
+<div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">markdown 从基础使用到进阶</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">markdown 从基础使用到进阶</h1>
+        <div class="stuff">
+            <span>九月 25, 2021</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <blockquote>
 <p>是什么，为什么，如何做？</p>
 </blockquote>
 <p><strong>使用 markdown 的时间也快两年了，在此重新补充一些新的markdown使用技巧，以帮助自己能够更方便地撰写文档。</strong></p>
-<h3 id="通过使用三个星号建立一个分割线"><a href="#通过使用三个星号建立一个分割线" class="headerlink" title="通过使用三个星号建立一个分割线"></a>通过使用三个星号建立一个分割线</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
+<h3 id="通过使用三个星号建立一个分割线"><a href="#通过使用三个星号建立一个分割线" class="headerlink" title="通过使用三个星号建立一个分割线"></a>通过使用三个星号建立一个分割线</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
 
 <table><tr><td bgcolor=lightblue><font color=red>效果如下：</td></tr></table>
 
 <hr>
-<h3 id="更改字体颜色"><a href="#更改字体颜色" class="headerlink" title="更改字体颜色"></a>更改字体颜色</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;</span><br><span class="line">&lt;font color=red&gt;我是红色&lt;/font&gt;</span><br><span class="line">&lt;font color=#008000&gt;我是绿色&lt;/font&gt;</span><br><span class="line">&lt;font color=Blue&gt;我是蓝色&lt;/font&gt;</span><br><span class="line">&lt;font size=5&gt;我是尺寸&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;黑体&quot; color=green size=5&gt;我是黑体，绿色，尺寸为5&lt;/font&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="更改字体颜色"><a href="#更改字体颜色" class="headerlink" title="更改字体颜色"></a>更改字体颜色</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;</span><br><span class="line">&lt;font color=red&gt;我是红色&lt;/font&gt;</span><br><span class="line">&lt;font color=#008000&gt;我是绿色&lt;/font&gt;</span><br><span class="line">&lt;font color=Blue&gt;我是蓝色&lt;/font&gt;</span><br><span class="line">&lt;font size=5&gt;我是尺寸&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;黑体&quot; color=green size=5&gt;我是黑体，绿色，尺寸为5&lt;/font&gt;</span><br></pre></td></tr></table></figure>
 
 <table><tr><td bgcolor=lightblue><font color=red>效果如下：</td></tr></table>
 
 <p><font face="黑体">我是黑体字</font><br><font face="微软雅黑">我是微软雅黑</font><br><font face="STCAIYUN">我是华文彩云</font><br><font color=red>我是红色</font><br><font color=#008000>我是绿色</font><br><font color=Blue>我是蓝色</font><br><font size=5>我是尺寸</font><br><font face="黑体" color=green size=5>我是黑体，绿色，尺寸为5</font></p>
 <h3 id="为文字添加背景色"><a href="#为文字添加背景色" class="headerlink" title="为文字添加背景色"></a>为文字添加背景色</h3><p>由于 style 标签和标签的 style 属性不被支持，所以这里只能是借助 table, tr, td 等表格标签的 bgcolor 属性来实现背景色。故这里对于文字背景色的设置，只是将那一整行看作一个表格，更改了那个格子的背景色（bgcolor）。 语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;背景色yellow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;背景色yellow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure>
 
 <table><tr><td bgcolor=yellow>背景色yellow</td></tr></table>
 
 
 
-<h3 id="添加-html-类型的图片"><a href="#添加-html-类型的图片" class="headerlink" title="添加 html 类型的图片"></a>添加 html 类型的图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div align=&quot;center&quot;&gt;</span><br><span class="line">&lt;img src = &#x27;https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png&#x27; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="添加-html-类型的图片"><a href="#添加-html-类型的图片" class="headerlink" title="添加 html 类型的图片"></a>添加 html 类型的图片</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align=&quot;center&quot;&gt;</span><br><span class="line">&lt;img src = &#x27;https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png&#x27; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
 <div align="center">
 <img src = 'https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png' />
@@ -859,44 +818,138 @@
     </tbody>
 </table>
 </div>
-]]></content>
-  </entry>
-  <entry>
-    <title>git 学习笔记</title>
-    <url>/2021/09/26/blog6/</url>
-    <content><![CDATA[<p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o='Ardcy'
+        data-a='Ardcy'
+        data-d='false'
+    >查看评论</div>
 
 
-<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E4%BD%BF%E7%94%A8%E4%B8%89%E4%B8%AA%E6%98%9F%E5%8F%B7%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%88%86%E5%89%B2%E7%BA%BF"><span class="toc-number">1.</span> <span class="toc-text">通过使用三个星号建立一个分割线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2"><span class="toc-number">2.</span> <span class="toc-text">更改字体颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E6%96%87%E5%AD%97%E6%B7%BB%E5%8A%A0%E8%83%8C%E6%99%AF%E8%89%B2"><span class="toc-number">3.</span> <span class="toc-text">为文字添加背景色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-html-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%9B%BE%E7%89%87"><span class="toc-number">4.</span> <span class="toc-text">添加 html 类型的图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%BD%95-html-%E9%A2%9C%E8%89%B2%E9%9B%86%E5%90%88-%EF%BC%88-%E5%8F%AF%E8%87%AA%E7%94%B1%E5%AE%9A%E4%B9%89-%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">附录 html 颜色集合 （ 可自由定义 ）</span></a></li></ol>	
+        </div>
+    
+</div>
 
 
-<p><strong>Ans</strong>: 参考<a href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
-<p>合并多个commit的情景可分为以下两种情况：</p>
-<ul>
-<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
-</li>
-<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
-</li>
-</ul>
-<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+</body>
 
-<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
-<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
-<ol>
-<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
-</li>
-<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
-</li>
-<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
-</li>
-</ol>
-<blockquote>
-<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
-</blockquote>
-<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
-]]></content>
-  </entry>
-</search>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
