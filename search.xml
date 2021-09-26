@@ -42,7 +42,7 @@
     <content><![CDATA[<h3 id="A-Display-The-Number"><a href="#A-Display-The-Number" class="headerlink" title="A Display The Number"></a>A <a href="https://codeforces.com/contest/1295/problem/A">Display The Number</a></h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几</p>
 <h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可</p>
 <h3 id="B-Infinite-Prefixes"><a href="#B-Infinite-Prefixes" class="headerlink" title="B Infinite Prefixes"></a>B <a href="https://codeforces.com/contest/1295/problem/B">Infinite Prefixes</a></h3><h5 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h5><p>有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$</p>
-<h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>每一个串存在一个$u​$,即整串的前缀01差，无限前缀能组成的数字仅有前$n​$项前缀01差及无限u的叠加</p>
+<h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>每一个串存在一个$u$,即整串的前缀01差，无限前缀能组成的数字仅有前$n$项前缀01差及无限u的叠加</p>
 <p>（注意考虑特殊条件） <del>不考虑就hack</del></p>
 <h3 id="C-Obtain-The-String"><a href="#C-Obtain-The-String" class="headerlink" title="C Obtain The String"></a>C <a href="https://codeforces.com/contest/1295/problem/C">Obtain The String</a></h3><h5 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h5><p>有两个小写字母字符串$s$和$t$,定义操作：每次可将s的一个非连续子串取出，求最小的操作数$n$,可使得$n$次得到的子串连续成为字符串$t$</p>
 <h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>直接贪心，利用子序列自动机加速</p>
