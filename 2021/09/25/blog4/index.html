@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="第一章 计算机网络体系结构1.1 计算机网络概述 hello world 
-1.2 计算机网络体系结构与参考模型第二章 物理层第三章 数据链路层第四章 网络层第五章 传输层第六章 应用层"> 
+    <meta name="description" content="第一章 计算机网络体系结构1.1 计算机网络概述Q: 集线器是什么？
+A：集线器是一款网络设备，将多条以太网双绞线或者光纤连接在同一段物理介质下。集线器会广播式发送数据，数据信息会被发送到每一个端口,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -58,8 +58,84 @@
 
         </div>
         <div class="content markdown">
-            <h2 id="第一章-计算机网络体系结构"><a href="#第一章-计算机网络体系结构" class="headerlink" title="第一章 计算机网络体系结构"></a>第一章 计算机网络体系结构</h2><h3 id="1-1-计算机网络概述"><a href="#1-1-计算机网络概述" class="headerlink" title="1.1 计算机网络概述"></a>1.1 计算机网络概述</h3><p><font color=#00FFFF> hello world </font></p>
-<h3 id="1-2-计算机网络体系结构与参考模型"><a href="#1-2-计算机网络体系结构与参考模型" class="headerlink" title="1.2 计算机网络体系结构与参考模型"></a>1.2 计算机网络体系结构与参考模型</h3><h2 id="第二章-物理层"><a href="#第二章-物理层" class="headerlink" title="第二章 物理层"></a>第二章 物理层</h2><h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>
+            <h2 id="第一章-计算机网络体系结构"><a href="#第一章-计算机网络体系结构" class="headerlink" title="第一章 计算机网络体系结构"></a>第一章 计算机网络体系结构</h2><h3 id="1-1-计算机网络概述"><a href="#1-1-计算机网络概述" class="headerlink" title="1.1 计算机网络概述"></a>1.1 计算机网络概述</h3><p><strong>Q</strong>: 集线器是什么？</p>
+<p><strong>A</strong>：集线器是一款网络设备，将多条以太网双绞线或者光纤连接在同一段物理介质下。集线器会广播式发送数据，数据信息会被发送到每一个端口（不安全）; 各站点共享带宽，使得平均带宽减小；工作站不能同时发送和接受数据。</p>
+<p><strong>Q</strong>：<strong>网桥</strong>是什么？ （<strong>网桥也叫做桥接器</strong>）</p>
+<p><strong>A</strong>：网桥将两个相似的网络连接起来，并对网络数据的流通进行管理。它工作于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82">数据链路层</a>，不但能扩展网络的距离或范围，而且可提高网络的性能、可靠性和安全性。网络1 和网络2 通过网桥连接后，网桥接收网络1 发送的数据包，检查数据包中的地址，如果地址属于网络1 ，它就将其放弃，相反，如果是网络2 的地址，它就继续发送给网络2.这样可利用网桥隔离信息，将同一个网络号划分成多个网段（属于同一个网络号），隔离出安全网段，防止其他网段内的用户非法访问。由于网络的分段，各网段相对独立（属于同一个网络号），一个网段的故障不会影响到另一个网段的运行。</p>
+<p><strong>Q</strong>: 如何理解<strong>子网掩码</strong>？</p>
+<p><strong>A</strong>: <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/56895036">直接点链接</a></p>
+<p>附加一些个人理解：</p>
+<p>内网中192.168.1.199的前三组是网络号，后一组是主机号，子网掩码就是255.255.255.0</p>
+<p>目的：为使得所有主机可以完成通信，需要通过 IP 地址和子网掩码按位与得到的值相同。</p>
+<p>方法：子网掩码最后一位为0，可以使得256个主机实现互联。</p>
+<blockquote>
+<p><strong>要说明的是</strong>：不是某个IP的网络号和主机号决定子网掩码是什么，而是子网掩码决定了某个IP地址的网络号与主机号是什么，IP地址是要搭配子网掩码使用的。例如上面的子网掩码决定了192.168.1.199的前三段192.168.1是网络号，最后一段199是主机号。</p>
+</blockquote>
+<p><strong>Q</strong>: <strong>网关</strong>是什么？</p>
+<p><strong>A</strong>: <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E5%85%B3/98992">百度百科介绍</a></p>
+<h3 id="1-2-计算机网络体系结构与参考模型"><a href="#1-2-计算机网络体系结构与参考模型" class="headerlink" title="1.2 计算机网络体系结构与参考模型"></a>1.2 计算机网络体系结构与参考模型</h3><h2 id="第二章-物理层"><a href="#第二章-物理层" class="headerlink" title="第二章 物理层"></a>第二章 物理层</h2><p>[考纲内容] </p>
+<p>（通信基础）</p>
+<p>信道、信号、带宽、码元、波特、速率、信源、信宿等基本概念</p>
+<p>奈奎斯特定理和香农定理；编码与调制</p>
+<p>电路交换、报文交换和分组交换；数据报和虚电路</p>
+<p>（传输介质）</p>
+<p>双绞线、同轴电缆、光纤与无线传输介质；物理层接口的特性</p>
+<p>（物理层设备）</p>
+<p>中继器、集线器</p>
+<h3 id="2-1-通信基础"><a href="#2-1-通信基础" class="headerlink" title="2.1 通信基础"></a>2.1 通信基础</h3><ul>
+<li><p>数据</p>
+<p>数据是指传送信息的实体。</p>
+</li>
+<li><p>码元</p>
+<p>码元是指用一个固定时长的信号波形表示一位k进制数字，代表不同离散数值的基本波形。1码元可以携带多个比特的信息量。</p>
+</li>
+<li><p>信源</p>
+<p>产生和发送数据的源头。</p>
+</li>
+<li><p>信宿</p>
+<p>接受数据的终点。</p>
+</li>
+<li><p>信道</p>
+<p>信道是信号的传输媒介。</p>
+</li>
+<li><p>速率</p>
+<p>数据率，指数据的传输速率，表示单位时间内传输的数据量。</p>
+<ul>
+<li>码元传输速率。表示单位时间内数字通信系统所传输的码元个数。</li>
+<li>信息传输速率。表示单位时间内数字通信系统所传输的二进制码元个数（即比特数）。单位是比特每秒。</li>
+</ul>
+</li>
+<li><p>带宽</p>
+<p>带宽表示单位时间内从网络上的某一点到另一点的所能通过的最高数据率。单位是 b/s,或bit/s.</p>
+</li>
+</ul>
+<p>从通信双方信息的<strong>交互方式</strong>看，可以有三种基本方式：</p>
+<ul>
+<li><strong>单工通信</strong>。只有一个方向的的通信而没有反方向的交互，仅需要一条信道。无线电广播、电视广播。</li>
+<li><strong>半双工通信</strong>。通信的双方都可以发送和接受信息，但任何一方都不能同时发送和接受。</li>
+<li><strong>全双工通信</strong>。通信双方可以同时发送和接受信息，也需要两条信道</li>
+</ul>
+<p><strong>奈奎斯特定理与香农定理</strong></p>
+<ul>
+<li><p>奈奎斯特定理的理解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/222644023">知乎</a></p>
+</li>
+<li><p>香农定理</p>
+</li>
+</ul>
+<p>数据无论是数字的还是模拟的，为了传输的目的都必须转变成信号，把数据变换为模拟信号的过程成为调制，把数据变换为数字信号的过程称为编码。</p>
+<p>四种编码方式</p>
+<ul>
+<li><p>非归零码</p>
+<p>用两个电压来表示两个二进制数字，如用低电平表示0，高电平表示1。编码虽然容易实现，但是没有检错功能，而且也无法判断一个码元的开始和结束，以至于收发双方难以保持同步。</p>
+</li>
+<li><p>曼彻斯特编码</p>
+<p>将一个码元分成两个相等的间隔。特点是在每一个码元的中间出现电平跳变。以太网使用的编码方式就是曼彻斯特编码。</p>
+</li>
+<li><p>差分曼彻斯特编码</p>
+<p>可以实现自同步，抗干扰性良好。</p>
+</li>
+</ul>
+<h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -94,7 +170,7 @@
     </div>
     
         <div class='side'>
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">第一章 计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 计算机网络概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B8%8E%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 计算机网络体系结构与参考模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">第二章 物理层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">第三章 数据链路层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">第四章 网络层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">第五章 传输层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">6.</span> <span class="toc-text">第六章 应用层</span></a></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">第一章 计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 计算机网络概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B8%8E%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 计算机网络体系结构与参考模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">第二章 物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 通信基础</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">第三章 数据链路层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">第四章 网络层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">第五章 传输层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">6.</span> <span class="toc-text">第六章 应用层</span></a></li></ol>	
         </div>
     
 </div>

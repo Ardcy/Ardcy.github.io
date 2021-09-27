@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>论文笔记模板 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="阅读笔记模板论文题目2016 CVPR（时间 ，会议）Abstract
+作者研究了诸多的融合方式，有了以下发现：
+相比于在softmax层做融合，一个时空网络在卷积层融合能够达到相同的效果，但是却可,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    
+<div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">论文笔记模板</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">论文笔记模板</h1>
+        <div class="stuff">
+            <span>九月 27, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="阅读笔记模板"><a href="#阅读笔记模板" class="headerlink" title="阅读笔记模板"></a>阅读笔记模板</h3><h1 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h1><h3 id="2016-CVPR（时间-，会议）"><a href="#2016-CVPR（时间-，会议）" class="headerlink" title="2016 CVPR（时间 ，会议）"></a>2016 CVPR（时间 ，会议）</h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>作者研究了诸多的融合方式，有了以下发现：<ul>
+<li>相比于在softmax层做融合，一个时空网络在卷积层融合能够达到相同的效果，但是却可以节省许多参数开销。</li>
+<li>在靠后的层做融合效果要更好。同时在分类层添加额外的融合能够提升整体效果。</li>
+<li>在时间和空间信息交汇的位置对抽象的卷积特征做pooling能够显著提升模型表现。</li>
+</ul>
+</li>
+<li>基于这些作者设计了新的CNN结构来完成视频的时空信息融合，并达到SOTA。</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><hr>
+<h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h3 id="3-1-Spatial-fusion"><a href="#3-1-Spatial-fusion" class="headerlink" title="3.1.Spatial fusion"></a>3.1.Spatial fusion</h3><h3 id="3-2-融合位置"><a href="#3-2-融合位置" class="headerlink" title="3.2 融合位置"></a>3.2 融合位置</h3><h3 id="3-3时间融合"><a href="#3-3时间融合" class="headerlink" title="3.3时间融合"></a>3.3时间融合</h3><h3 id="3-4-Proposed-architecture"><a href="#3-4-Proposed-architecture" class="headerlink" title="3.4 Proposed architecture"></a>3.4 Proposed architecture</h3><h3 id="3-5-Implementation-details"><a href="#3-5-Implementation-details" class="headerlink" title="3.5 Implementation details"></a>3.5 Implementation details</h3><h4 id="双流结构："><a href="#双流结构：" class="headerlink" title="双流结构："></a>双流结构：</h4><h4 id="双流卷积fusion："><a href="#双流卷积fusion：" class="headerlink" title="双流卷积fusion："></a>双流卷积fusion：</h4><h4 id="Spatiotemporal-architecture："><a href="#Spatiotemporal-architecture：" class="headerlink" title="Spatiotemporal architecture："></a>Spatiotemporal architecture：</h4><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id="4-1-数据和experimental-protocols"><a href="#4-1-数据和experimental-protocols" class="headerlink" title="4.1 数据和experimental protocols"></a>4.1 数据和experimental protocols</h3><h3 id="4-2-空间上融合两个流"><a href="#4-2-空间上融合两个流" class="headerlink" title="4.2 空间上融合两个流"></a>4.2 空间上融合两个流</h3><h3 id="4-3-融合位置"><a href="#4-3-融合位置" class="headerlink" title="4.3 融合位置"></a>4.3 融合位置</h3><h3 id="4-4-Going-from-deep-to-very-deep-models"><a href="#4-4-Going-from-deep-to-very-deep-models" class="headerlink" title="4.4 Going from deep to very deep models"></a>4.4 Going from deep to very deep models</h3><h3 id="4-5-如何在时间流融合"><a href="#4-5-如何在时间流融合" class="headerlink" title="4.5 如何在时间流融合"></a>4.5 如何在时间流融合</h3><h3 id="4-6-与SOTA比较"><a href="#4-6-与SOTA比较" class="headerlink" title="4.6 与SOTA比较"></a>4.6 与SOTA比较</h3>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o='Ardcy'
+        data-a='Ardcy'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.</span> <span class="toc-text">阅读笔记模板</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%A2%98%E7%9B%AE"><span class="toc-number"></span> <span class="toc-text">论文题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2016-CVPR%EF%BC%88%E6%97%B6%E9%97%B4-%EF%BC%8C%E4%BC%9A%E8%AE%AE%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">2016 CVPR（时间 ，会议）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number"></span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number"></span> <span class="toc-text">1.Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Related-work"><span class="toc-number"></span> <span class="toc-text">2.Related work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Approach"><span class="toc-number"></span> <span class="toc-text">3.Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Spatial-fusion"><span class="toc-number">1.</span> <span class="toc-text">3.1.Spatial fusion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%9E%8D%E5%90%88%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">3.2 融合位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%97%B6%E9%97%B4%E8%9E%8D%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text">3.3时间融合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-Proposed-architecture"><span class="toc-number">4.</span> <span class="toc-text">3.4 Proposed architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-Implementation-details"><span class="toc-number">5.</span> <span class="toc-text">3.5 Implementation details</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E6%B5%81%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">双流结构：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E6%B5%81%E5%8D%B7%E7%A7%AFfusion%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">双流卷积fusion：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spatiotemporal-architecture%EF%BC%9A"><span class="toc-number">5.3.</span> <span class="toc-text">Spatiotemporal architecture：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Evaluation"><span class="toc-number"></span> <span class="toc-text">4.Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%95%B0%E6%8D%AE%E5%92%8Cexperimental-protocols"><span class="toc-number">1.</span> <span class="toc-text">4.1 数据和experimental protocols</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%A9%BA%E9%97%B4%E4%B8%8A%E8%9E%8D%E5%90%88%E4%B8%A4%E4%B8%AA%E6%B5%81"><span class="toc-number">2.</span> <span class="toc-text">4.2 空间上融合两个流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%9E%8D%E5%90%88%E4%BD%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">4.3 融合位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-Going-from-deep-to-very-deep-models"><span class="toc-number">4.</span> <span class="toc-text">4.4 Going from deep to very deep models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%B6%E9%97%B4%E6%B5%81%E8%9E%8D%E5%90%88"><span class="toc-number">5.</span> <span class="toc-text">4.5 如何在时间流融合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E4%B8%8ESOTA%E6%AF%94%E8%BE%83"><span class="toc-number">6.</span> <span class="toc-text">4.6 与SOTA比较</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
