@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.29  Educational Codeforces Round 81</title>
-    <url>/2021/09/24/blog2/</url>
-    <content><![CDATA[<h3 id="A-Display-The-Number"><a href="#A-Display-The-Number" class="headerlink" title="A Display The Number"></a>A <a href="https://codeforces.com/contest/1295/problem/A">Display The Number</a></h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几</p>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可</p>
-<h3 id="B-Infinite-Prefixes"><a href="#B-Infinite-Prefixes" class="headerlink" title="B Infinite Prefixes"></a>B <a href="https://codeforces.com/contest/1295/problem/B">Infinite Prefixes</a></h3><h5 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h5><p>有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$</p>
-<h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>每一个串存在一个$u$,即整串的前缀01差，无限前缀能组成的数字仅有前$n$项前缀01差及无限u的叠加</p>
-<p>（注意考虑特殊条件） <del>不考虑就hack</del></p>
-<h3 id="C-Obtain-The-String"><a href="#C-Obtain-The-String" class="headerlink" title="C Obtain The String"></a>C <a href="https://codeforces.com/contest/1295/problem/C">Obtain The String</a></h3><h5 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h5><p>有两个小写字母字符串$s$和$t$,定义操作：每次可将s的一个非连续子串取出，求最小的操作数$n$,可使得$n$次得到的子串连续成为字符串$t$</p>
-<h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>直接贪心，利用子序列自动机加速</p>
-<p>将26个字母保存1个$nex$二维数组，$nex_{ij}$表示第$s$在第$i$个位置后的字母$j $第一次出现的位置,我们在求解过程中：</p>
-<p>首先查找t的第一个字母在s中第一次出现的位置，即$nex_{0,t_1}$,找到第一个字母后，寻找t的第二个字母的过程就是在$s$中$t$的第一个字母的位置后继续寻找第一次出现第二个字母的位置，以此类推，若是找不到，则操作数++，重新寻找</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100005</span>],t[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> nxt[<span class="number">100005</span>][<span class="number">26</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> n=<span class="built_in">strlen</span>(s+<span class="number">1</span>),m=<span class="built_in">strlen</span>(t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[n][j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[i][j]=nxt[i+<span class="number">1</span>][j];</span><br><span class="line">            nxt[i][s[i+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>,ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">if</span>(!now)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                <span class="keyword">if</span>(!now)&#123;ans=<span class="number">-1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="D-Same-GCDs"><a href="#D-Same-GCDs" class="headerlink" title="D Same GCDs"></a>D <a href="https://codeforces.com/contest/1295/problem/D">Same GCDs</a></h3><h5 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $</p>
-<h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>$gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$</p>
-<p>则原式可化为</p>
-<p>…</p>
-<p>直接求欧拉函数即可</p>
-<h3 id="E-Permutation-Separation"><a href="#E-Permutation-Separation" class="headerlink" title="E Permutation Separation"></a>E <a href="https://codeforces.com/contest/1295/problem/E">Permutation Separation</a></h3><h5 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h5><p>给一个排列，每个排列中的第$i$个数字为$p_i$,权值为$w_i$.你可以选择一个位置切一刀把它分成左右两部分，然后你可以花费$w_i$把$p_i$移动到另一个部分。最终要保证左半部分的最大值小于右半部分的最小值。</p>
-<h5 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h5><p>基础还是太弱，看了半天题解感觉终于明白了</p>
-<p>首先暴力解法：就是枚举将左右集合分开的位置，然后枚举边界x,使得左边集合大于x的数与右边集合小于x的数花费和最小</p>
-<p>线段树解法：</p>
-<p>线段树是将枚举的边界x作为叶子节点的</p>
-<p>如果能够确定切的位置  左边集合与右边集合均已经确定，每一个叶子节点x保存的是当前集合下以x为边界所需花费，由于线段树维护的是最小值，全局最小值就是当前确定集合的最小花费。</p>
-<p>如何更新：</p>
-<p>当集合发生改变时，比如说左边集合中新增了右边集合的$y$,权值为$w$,则当前集合下的最优解法中的以比y小的边界均需要将y移动到右边,区间增加$w$，比y大的边界则会略去这一步骤，即区间减去$w$</p>
-]]></content>
-  </entry>
-  <entry>
     <title>ACM--概率</title>
     <url>/2021/09/24/blog1/</url>
     <content><![CDATA[<h4 id="n个球放入m个盒子问题"><a href="#n个球放入m个盒子问题" class="headerlink" title="n个球放入m个盒子问题"></a>n个球放入m个盒子问题</h4><ol>
@@ -64,6 +34,36 @@
 <p>0 n &lt; m</p>
 </li>
 </ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>1.29  Educational Codeforces Round 81</title>
+    <url>/2021/09/24/blog2/</url>
+    <content><![CDATA[<h3 id="A-Display-The-Number"><a href="#A-Display-The-Number" class="headerlink" title="A Display The Number"></a>A <a href="https://codeforces.com/contest/1295/problem/A">Display The Number</a></h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几</p>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可</p>
+<h3 id="B-Infinite-Prefixes"><a href="#B-Infinite-Prefixes" class="headerlink" title="B Infinite Prefixes"></a>B <a href="https://codeforces.com/contest/1295/problem/B">Infinite Prefixes</a></h3><h5 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h5><p>有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$</p>
+<h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>每一个串存在一个$u$,即整串的前缀01差，无限前缀能组成的数字仅有前$n$项前缀01差及无限u的叠加</p>
+<p>（注意考虑特殊条件） <del>不考虑就hack</del></p>
+<h3 id="C-Obtain-The-String"><a href="#C-Obtain-The-String" class="headerlink" title="C Obtain The String"></a>C <a href="https://codeforces.com/contest/1295/problem/C">Obtain The String</a></h3><h5 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h5><p>有两个小写字母字符串$s$和$t$,定义操作：每次可将s的一个非连续子串取出，求最小的操作数$n$,可使得$n$次得到的子串连续成为字符串$t$</p>
+<h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>直接贪心，利用子序列自动机加速</p>
+<p>将26个字母保存1个$nex$二维数组，$nex_{ij}$表示第$s$在第$i$个位置后的字母$j $第一次出现的位置,我们在求解过程中：</p>
+<p>首先查找t的第一个字母在s中第一次出现的位置，即$nex_{0,t_1}$,找到第一个字母后，寻找t的第二个字母的过程就是在$s$中$t$的第一个字母的位置后继续寻找第一次出现第二个字母的位置，以此类推，若是找不到，则操作数++，重新寻找</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100005</span>],t[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> nxt[<span class="number">100005</span>][<span class="number">26</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> n=<span class="built_in">strlen</span>(s+<span class="number">1</span>),m=<span class="built_in">strlen</span>(t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[n][j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[i][j]=nxt[i+<span class="number">1</span>][j];</span><br><span class="line">            nxt[i][s[i+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>,ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">if</span>(!now)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                <span class="keyword">if</span>(!now)&#123;ans=<span class="number">-1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="D-Same-GCDs"><a href="#D-Same-GCDs" class="headerlink" title="D Same GCDs"></a>D <a href="https://codeforces.com/contest/1295/problem/D">Same GCDs</a></h3><h5 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $</p>
+<h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>$gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$</p>
+<p>则原式可化为</p>
+<p>…</p>
+<p>直接求欧拉函数即可</p>
+<h3 id="E-Permutation-Separation"><a href="#E-Permutation-Separation" class="headerlink" title="E Permutation Separation"></a>E <a href="https://codeforces.com/contest/1295/problem/E">Permutation Separation</a></h3><h5 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h5><p>给一个排列，每个排列中的第$i$个数字为$p_i$,权值为$w_i$.你可以选择一个位置切一刀把它分成左右两部分，然后你可以花费$w_i$把$p_i$移动到另一个部分。最终要保证左半部分的最大值小于右半部分的最小值。</p>
+<h5 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h5><p>基础还是太弱，看了半天题解感觉终于明白了</p>
+<p>首先暴力解法：就是枚举将左右集合分开的位置，然后枚举边界x,使得左边集合大于x的数与右边集合小于x的数花费和最小</p>
+<p>线段树解法：</p>
+<p>线段树是将枚举的边界x作为叶子节点的</p>
+<p>如果能够确定切的位置  左边集合与右边集合均已经确定，每一个叶子节点x保存的是当前集合下以x为边界所需花费，由于线段树维护的是最小值，全局最小值就是当前确定集合的最小花费。</p>
+<p>如何更新：</p>
+<p>当集合发生改变时，比如说左边集合中新增了右边集合的$y$,权值为$w$,则当前集合下的最优解法中的以比y小的边界均需要将y移动到右边,区间增加$w$，比y大的边界则会略去这一步骤，即区间减去$w$</p>
 ]]></content>
   </entry>
   <entry>
@@ -163,7 +163,7 @@
 </li>
 </ul>
 <p>数据无论是数字的还是模拟的，为了传输的目的都必须转变成信号，把数据变换为模拟信号的过程成为调制，把数据变换为数字信号的过程称为编码。</p>
-<p>四种编码方式</p>
+<p>三种编码方式</p>
 <ul>
 <li><p>非归零码</p>
 <p>用两个电压来表示两个二进制数字，如用低电平表示0，高电平表示1。编码虽然容易实现，但是没有检错功能，而且也无法判断一个码元的开始和结束，以至于收发双方难以保持同步。</p>
@@ -175,66 +175,155 @@
 <p>可以实现自同步，抗干扰性良好。</p>
 </li>
 </ul>
-<h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>]]></content>
-  </entry>
-  <entry>
-    <title>git 学习笔记</title>
-    <url>/2021/09/26/blog6/</url>
-    <content><![CDATA[<p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
-
-
-<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
-
-
-<p><strong>Ans</strong>: 参考<a href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
-<p>合并多个commit的情景可分为以下两种情况：</p>
+<p>数字数据调制为模拟信号</p>
 <ul>
-<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
+<li><p>幅移键控</p>
+<p>通过改变载波信号的振幅来表示数字信号1和0. 比较容易实现，但是抗干扰能力差。</p>
 </li>
-<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
+<li><p>频移键控</p>
+<p>通过改变载波信号的频率来表示数字信号1和0，而振幅和相位不改变。容易实现，抗干扰能力强，目前应用较为广泛。</p>
 </li>
 </ul>
-<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
-
-<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
-<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
-<ol>
-<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
-</li>
-<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
-</li>
-<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
-</li>
-</ol>
+<p>模拟数据编码为数字信号。</p>
 <blockquote>
-<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
+<p>该编码方法最典型的例子就是常用于对音频信号进行编码的脉码调制（PCM）。它主要包括三个步骤，即抽样、量化、编码</p>
 </blockquote>
-<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>论文笔记模板</title>
-    <url>/2021/09/27/blog7/</url>
-    <content><![CDATA[<h3 id="阅读笔记模板"><a href="#阅读笔记模板" class="headerlink" title="阅读笔记模板"></a>阅读笔记模板</h3><h1 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h1><h3 id="2016-CVPR（时间-，会议）"><a href="#2016-CVPR（时间-，会议）" class="headerlink" title="2016 CVPR（时间 ，会议）"></a>2016 CVPR（时间 ，会议）</h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>作者研究了诸多的融合方式，有了以下发现：<ul>
-<li>相比于在softmax层做融合，一个时空网络在卷积层融合能够达到相同的效果，但是却可以节省许多参数开销。</li>
-<li>在靠后的层做融合效果要更好。同时在分类层添加额外的融合能够提升整体效果。</li>
-<li>在时间和空间信息交汇的位置对抽象的卷积特征做pooling能够显著提升模型表现。</li>
+<p>模拟数据调制为模拟信号</p>
+<blockquote>
+<p>为了实现传输的有效性，可能需要较高的频率。这种调制方法还可以使用频分（FDM）复用技术，充分利用带宽资源。</p>
+</blockquote>
+<p>电路交换、报文交换与分组交换</p>
+<ul>
+<li><p>电路交换</p>
+<p>在进行数据传前，两个节点之间必须先建立一条专用（双方独占）的物理通信路径（由通信双方之间的交换设备和链路逐段连接而成），该路径可能经过许多中间节点。该线路在整个数据传输期间一直被独占，直到通信结束后才被释放。因此，电路交换技术分为三个阶段：连接建立，数据传输和连接释放。</p>
+<p>电路交换的关键点是：在数据传输的过程种，用户始终占用端到端的固定传输带宽。</p>
+<p>优点：</p>
+<ul>
+<li>通信时延小</li>
+<li>有序传输</li>
+<li>没有冲突</li>
+<li>适用范围广</li>
+<li>实时性强</li>
+<li>控制简单</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>建立连接时间长</li>
+<li>线路独占，使用效率低。</li>
+<li>灵活性差。</li>
+<li>难以规格化。</li>
 </ul>
 </li>
-<li>基于这些作者设计了新的CNN结构来完成视频的时空信息融合，并达到SOTA。</li>
+<li><p>报文交换</p>
+<p>数据交换的单位是报文，报文携带有目标地址，源地址等信息。报文交换在交换节点采用的是存储转发的传输方式。</p>
+<p>优点：</p>
+<ul>
+<li>无需建立连接。</li>
+<li>动态分配线路。</li>
+<li>提高线路可靠性。</li>
+<li>提高线路利用率。</li>
+<li>提供多目标服务。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><hr>
-<h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h3 id="3-1-Spatial-fusion"><a href="#3-1-Spatial-fusion" class="headerlink" title="3.1.Spatial fusion"></a>3.1.Spatial fusion</h3><h3 id="3-2-融合位置"><a href="#3-2-融合位置" class="headerlink" title="3.2 融合位置"></a>3.2 融合位置</h3><h3 id="3-3时间融合"><a href="#3-3时间融合" class="headerlink" title="3.3时间融合"></a>3.3时间融合</h3><h3 id="3-4-Proposed-architecture"><a href="#3-4-Proposed-architecture" class="headerlink" title="3.4 Proposed architecture"></a>3.4 Proposed architecture</h3><h3 id="3-5-Implementation-details"><a href="#3-5-Implementation-details" class="headerlink" title="3.5 Implementation details"></a>3.5 Implementation details</h3><h4 id="双流结构："><a href="#双流结构：" class="headerlink" title="双流结构："></a>双流结构：</h4><h4 id="双流卷积fusion："><a href="#双流卷积fusion：" class="headerlink" title="双流卷积fusion："></a>双流卷积fusion：</h4><h4 id="Spatiotemporal-architecture："><a href="#Spatiotemporal-architecture：" class="headerlink" title="Spatiotemporal architecture："></a>Spatiotemporal architecture：</h4><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id="4-1-数据和experimental-protocols"><a href="#4-1-数据和experimental-protocols" class="headerlink" title="4.1 数据和experimental protocols"></a>4.1 数据和experimental protocols</h3><h3 id="4-2-空间上融合两个流"><a href="#4-2-空间上融合两个流" class="headerlink" title="4.2 空间上融合两个流"></a>4.2 空间上融合两个流</h3><h3 id="4-3-融合位置"><a href="#4-3-融合位置" class="headerlink" title="4.3 融合位置"></a>4.3 融合位置</h3><h3 id="4-4-Going-from-deep-to-very-deep-models"><a href="#4-4-Going-from-deep-to-very-deep-models" class="headerlink" title="4.4 Going from deep to very deep models"></a>4.4 Going from deep to very deep models</h3><h3 id="4-5-如何在时间流融合"><a href="#4-5-如何在时间流融合" class="headerlink" title="4.5 如何在时间流融合"></a>4.5 如何在时间流融合</h3><h3 id="4-6-与SOTA比较"><a href="#4-6-与SOTA比较" class="headerlink" title="4.6 与SOTA比较"></a>4.6 与SOTA比较</h3>]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>模板</tag>
-      </tags>
+<p>缺点：</p>
+<ul>
+<li>由于数据进入交换节点后要精力存储、转发这一过程，从而引起转发时延（包括接受报文、检验正确性、排队、发送时间等）</li>
+<li>报文交换对报文的大小没有限制，这就要求网络节点需要较大的缓存空间。</li>
+</ul>
+</li>
+<li><p>分组交换</p>
+<p>同报文交换一样，分组交换也采用了存储转发方式，但解决了报文交换中大报文传输的问题。分组交换限制了每次传送的数据大小的上限，把大的数据块划分为合理的小数据块，再加上一些必要的控制信息（如源地址、目标地址和编号信息等），构成分组（Packet）。</p>
+<p>优点：</p>
+<ul>
+<li>无建立时延。</li>
+<li>线路利用率高</li>
+<li>简化了存储管理（相对于报文交换）。</li>
+<li>加速传输：分组是逐个传输，可以使后一个分组的存储操作与前一个分组的转发操作并行，这种流水线方式减少了报文的传输时间。</li>
+<li>减少了出错几率和重发数据量。</li>
+</ul>
+</li>
+<li><p>分组交换的缺点</p>
+<ul>
+<li>存在传输时延、</li>
+<li>需要传输额外的信息量</li>
+<li>当分组交换采用数据报服务时，可能出现失序、丢失或者重复分组。</li>
+</ul>
+</li>
+</ul>
+<p>数据报与虚电路</p>
+<blockquote>
+<p>数据报与虚电路方式是分组交换的两种方式。</p>
+</blockquote>
+<ul>
+<li><p>数据报</p>
+<p>在端系统中实现的高层协议先把报文拆成若干个带有序号的数据单元，并在网络层加上地址等控制信息后形成数据包分组（即网络层PDU）。中间界点存储分组一段很短的时间，找到最佳的路由后，尽快转发每个分组。不同的分组可以走不同的路径，也可以按不同的顺序到达目的节点。</p>
+</li>
+<li><p>虚电路</p>
+<p>虚电路方式试图将数据报方式和电路交换方式解和起来，充分发挥两种方法的优点，以达到最佳的数据交换效果。</p>
+</li>
+</ul>
+<h3 id="2-2-传输介质"><a href="#2-2-传输介质" class="headerlink" title="2.2 传输介质"></a>2.2 传输介质</h3><p>传输介值可分为导向传输介质可非导向传输介质。在导向传输介质中，电磁波被导向沿着固体媒介（铜线或者光纤）传播，而非导向传输介质可以是空气、真空或者海水等。</p>
+<ul>
+<li><p>双绞线</p>
+<p>双绞线价格便宜，常用于局域网和传统电话网。双绞线带宽取决于铜线的粗细和传输的距离。模拟传输和数字传输都可以使用双绞线，其通信距离一半为几公里到几十公里。距离太远时，对于模拟传输，要用放大器放大衰减的信号；对于数字传输，要使用中继器将失真的信号整形。</p>
+</li>
+<li><p>同轴电缆</p>
+</li>
+<li><p>光纤（多模光纤和单模光纤）</p>
+</li>
+<li><p>无线传输介质——WLAN（无线局域网）</p>
+<p>无线电波、微波、红外线、激光</p>
+</li>
+</ul>
+<p>物理接口的特性</p>
+<blockquote>
+<p>常用的物理层接口标准有 EIA RS-232-C ADSL SONET/SDH</p>
+</blockquote>
+<ul>
+<li><p>机械特性</p>
+</li>
+<li><p>电气特性</p>
+</li>
+<li><p>功能特性</p>
+</li>
+<li><p>规程特性</p>
+</li>
+</ul>
+<h3 id="2-3-物理层设备"><a href="#2-3-物理层设备" class="headerlink" title="2.3 物理层设备"></a>2.3 物理层设备</h3><p>中继器</p>
+<blockquote>
+<p>中继器又称为转发器，主要功能是将信号整形并放大再转发出去。</p>
+<p>中继器两端的网段一定要是同一个协议。</p>
+</blockquote>
+<p>集线器</p>
+<blockquote>
+<p>实际上是多端口的中继器。</p>
+</blockquote>
+<h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><p>[考纲内容]</p>
+<p>（一）数据链路层的功能</p>
+<p>（二）组帧</p>
+<p>（三）差错控制</p>
+<p>检错编码；纠错编码</p>
+<p>（四）流量控制与可靠传输基指</p>
+<p>流量控制、可靠传输与滑动窗口机制；停止-等待协议</p>
+<p>后退N帧协议（GBN）；选择重传协议（SR）</p>
+<p>（五）介质访问控制</p>
+<ol>
+<li>信道划分</li>
+<li>随机访问</li>
+<li>轮询访问：令牌传递协议</li>
+</ol>
+<p>（六）局域网</p>
+<p>（七）广域网</p>
+<p>（八）数据链路层设备</p>
+<h3 id="数据链路层的功能"><a href="#数据链路层的功能" class="headerlink" title="数据链路层的功能"></a>数据链路层的功能</h3><blockquote>
+<p>数据链路层是在物理层提供服务的基础上像网络层提供服务，其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路。</p>
+</blockquote>
+<p>数据链路层可为网络层提供的服务有</p>
+<ul>
+<li>无确认的无连接服务</li>
+<li>有确认的无连接服务</li>
+<li>有确认的面向连接服务</li>
+</ul>
+<h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>]]></content>
   </entry>
   <entry>
     <title>markdown 从基础使用到进阶</title>
@@ -997,14 +1086,94 @@
 ]]></content>
   </entry>
   <entry>
+    <title>论文笔记模板</title>
+    <url>/2021/09/27/blog7/</url>
+    <content><![CDATA[<h3 id="阅读笔记模板"><a href="#阅读笔记模板" class="headerlink" title="阅读笔记模板"></a>阅读笔记模板</h3><h1 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h1><h3 id="2016-CVPR（时间-，会议）"><a href="#2016-CVPR（时间-，会议）" class="headerlink" title="2016 CVPR（时间 ，会议）"></a>2016 CVPR（时间 ，会议）</h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>作者研究了诸多的融合方式，有了以下发现：<ul>
+<li>相比于在softmax层做融合，一个时空网络在卷积层融合能够达到相同的效果，但是却可以节省许多参数开销。</li>
+<li>在靠后的层做融合效果要更好。同时在分类层添加额外的融合能够提升整体效果。</li>
+<li>在时间和空间信息交汇的位置对抽象的卷积特征做pooling能够显著提升模型表现。</li>
+</ul>
+</li>
+<li>基于这些作者设计了新的CNN结构来完成视频的时空信息融合，并达到SOTA。</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><hr>
+<h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h3 id="3-1-Spatial-fusion"><a href="#3-1-Spatial-fusion" class="headerlink" title="3.1.Spatial fusion"></a>3.1.Spatial fusion</h3><h3 id="3-2-融合位置"><a href="#3-2-融合位置" class="headerlink" title="3.2 融合位置"></a>3.2 融合位置</h3><h3 id="3-3时间融合"><a href="#3-3时间融合" class="headerlink" title="3.3时间融合"></a>3.3时间融合</h3><h3 id="3-4-Proposed-architecture"><a href="#3-4-Proposed-architecture" class="headerlink" title="3.4 Proposed architecture"></a>3.4 Proposed architecture</h3><h3 id="3-5-Implementation-details"><a href="#3-5-Implementation-details" class="headerlink" title="3.5 Implementation details"></a>3.5 Implementation details</h3><h4 id="双流结构："><a href="#双流结构：" class="headerlink" title="双流结构："></a>双流结构：</h4><h4 id="双流卷积fusion："><a href="#双流卷积fusion：" class="headerlink" title="双流卷积fusion："></a>双流卷积fusion：</h4><h4 id="Spatiotemporal-architecture："><a href="#Spatiotemporal-architecture：" class="headerlink" title="Spatiotemporal architecture："></a>Spatiotemporal architecture：</h4><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id="4-1-数据和experimental-protocols"><a href="#4-1-数据和experimental-protocols" class="headerlink" title="4.1 数据和experimental protocols"></a>4.1 数据和experimental protocols</h3><h3 id="4-2-空间上融合两个流"><a href="#4-2-空间上融合两个流" class="headerlink" title="4.2 空间上融合两个流"></a>4.2 空间上融合两个流</h3><h3 id="4-3-融合位置"><a href="#4-3-融合位置" class="headerlink" title="4.3 融合位置"></a>4.3 融合位置</h3><h3 id="4-4-Going-from-deep-to-very-deep-models"><a href="#4-4-Going-from-deep-to-very-deep-models" class="headerlink" title="4.4 Going from deep to very deep models"></a>4.4 Going from deep to very deep models</h3><h3 id="4-5-如何在时间流融合"><a href="#4-5-如何在时间流融合" class="headerlink" title="4.5 如何在时间流融合"></a>4.5 如何在时间流融合</h3><h3 id="4-6-与SOTA比较"><a href="#4-6-与SOTA比较" class="headerlink" title="4.6 与SOTA比较"></a>4.6 与SOTA比较</h3>]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>模板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git 学习笔记</title>
+    <url>/2021/09/26/blog6/</url>
+    <content><![CDATA[<p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
+<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
+
+
+<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
+<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
+
+
+<p><strong>Ans</strong>: 参考<a href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
+<p>合并多个commit的情景可分为以下两种情况：</p>
+<ul>
+<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
+</li>
+<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
+</li>
+</ul>
+<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
+
+<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
+<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
+<ol>
+<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
+</li>
+<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
+</li>
+<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
+</li>
+</ol>
+<blockquote>
+<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
+</blockquote>
+<table><tr><td bgcolor=lightblue><font color=000000>情景三： 主分支更新后，如何合并新的更新到自己的xx分支？</td></tr></table>
+
+
+
+
+
+
+
+
+
+<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
+]]></content>
+  </entry>
+  <entry>
     <title>GIRAFFE:Representing Scenes as Compositional Generative Neural Feature Fields</title>
     <url>/2021/09/27/blog8/</url>
-    <content><![CDATA[<h1 id="GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields"><a href="#GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields" class="headerlink" title="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"></a>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1><h3 id="CVPR-2021-oral-best-paper-award"><a href="#CVPR-2021-oral-best-paper-award" class="headerlink" title="CVPR 2021 (oral, best paper award)"></a>CVPR 2021 (oral, <strong>best paper award</strong>)</h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+    <content><![CDATA[<h1 id="GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields"><a href="#GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields" class="headerlink" title="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"></a>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1><h3 id="CVPR-2021-oral-best-paper-award"><a href="#CVPR-2021-oral-best-paper-award" class="headerlink" title="CVPR 2021 (oral, best paper award)"></a><a href="https://arxiv.org/abs/2011.12100">CVPR 2021 (oral, <strong>best paper award</strong>)</a></h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
       <tags>
         <tag>cvpr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>函数指针和指针函数</title>
+    <url>/2021/09/29/blog9/</url>
+    <content><![CDATA[<h2 id="函数指针和指针函数的使用"><a href="#函数指针和指针函数的使用" class="headerlink" title="函数指针和指针函数的使用"></a>函数指针和指针函数的使用</h2>]]></content>
+      <categories>
+        <category>c++ or c</category>
+      </categories>
+      <tags>
+        <tag>语言</tag>
       </tags>
   </entry>
 </search>
