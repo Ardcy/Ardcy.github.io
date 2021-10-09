@@ -37,6 +37,34 @@
 ]]></content>
   </entry>
   <entry>
+    <title>cifra10_dl</title>
+    <url>/2021/10/09/blog10/</url>
+    <content><![CDATA[<h1 id="cifra10-dl"><a href="#cifra10-dl" class="headerlink" title="cifra10_dl"></a>cifra10_dl</h1><p>选择深度学习框架： PyTorch</p>
+<p>数据集：CIFAR-10 数据集</p>
+<blockquote>
+<p>数据集介绍：该数据集共有60000张彩色图像，这些图像是32*32，分为10个类，每类6000张图。这里面有50000张用于训练，构成了5个训练批，每一批10000张图；另外10000用于测试，单独构成一批。测试批的数据里，取自10类中的每一类，每一类随机取1000张。抽剩下的就随机排列组成了训练批。注意一个训练批中的各类图像并不一定数量相同，总的来看训练批，每一类都有5000张图。</p>
+</blockquote>
+<p>实验目的： 通过调整网络结构，参数等方式，记录结果的变化情况。</p>
+<p>步骤：</p>
+<p>得到归一化值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rgb_mean = np.mean(trainset.train_data, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))/<span class="number">255</span></span><br><span class="line">rgb_std = np.std(trainset.train_data, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))/<span class="number">255</span></span><br><span class="line">rgb_mean ,rgb_std </span><br></pre></td></tr></table></figure>
+<p>介绍网络：</p>
+<p>我这个项目要表达哪些内容：</p>
+<ul>
+<li>模型推理前的所有步骤，为什么这么做</li>
+<li>模型结果整理</li>
+<li>模型主要尝试了哪些方向，这些方向的结果都是什么？（写代码，记录答案，第一次尝试，第二次尝试，必要可放在一个py文件中）</li>
+<li>总结</li>
+</ul>
+<p>数据集预处理</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">transform_train = transforms.Compose([</span><br><span class="line">    transforms.RandomCrop(<span class="number">32</span>, padding=<span class="number">4</span>),</span><br><span class="line">    transforms.RandomHorizontalFlip(),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.4914</span>, <span class="number">0.4822</span>, <span class="number">0.4465</span>), (<span class="number">0.2023</span>, <span class="number">0.1994</span>, <span class="number">0.2010</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">transform_test = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.4914</span>, <span class="number">0.4822</span>, <span class="number">0.4465</span>), (<span class="number">0.2023</span>, <span class="number">0.1994</span>, <span class="number">0.2010</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">trainset = torchvision.datasets.CIFAR10(</span><br><span class="line">    root=<span class="string">&#x27;./data&#x27;</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform_train)</span><br><span class="line">trainloader = torch.utils.data.DataLoader(</span><br><span class="line">    trainset, batch_size=<span class="number">128</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">testset = torchvision.datasets.CIFAR10(</span><br><span class="line">    root=<span class="string">&#x27;./data&#x27;</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform_test)</span><br><span class="line">testloader = torch.utils.data.DataLoader(</span><br><span class="line">    testset, batch_size=<span class="number">100</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">classes = (<span class="string">&#x27;plane&#x27;</span>, <span class="string">&#x27;car&#x27;</span>, <span class="string">&#x27;bird&#x27;</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;deer&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;frog&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>, <span class="string">&#x27;ship&#x27;</span>, <span class="string">&#x27;truck&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=args.lr,</span><br><span class="line">                      momentum=0.9, weight_decay=5e-4)</span><br><span class="line">scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)</span><br></pre></td></tr></table></figure>
+<p>训练过程：</p>
+<p>测试过程：</p>
+<p>结果：</p>
+]]></content>
+  </entry>
+  <entry>
     <title>1.29  Educational Codeforces Round 81</title>
     <url>/2021/09/24/blog2/</url>
     <content><![CDATA[<h3 id="A-Display-The-Number"><a href="#A-Display-The-Number" class="headerlink" title="A Display The Number"></a>A <a href="https://codeforces.com/contest/1295/problem/A">Display The Number</a></h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几</p>
@@ -49,8 +77,6 @@
 <p>将26个字母保存1个$nex$二维数组，$nex_{ij}$表示第$s$在第$i$个位置后的字母$j $第一次出现的位置,我们在求解过程中：</p>
 <p>首先查找t的第一个字母在s中第一次出现的位置，即$nex_{0,t_1}$,找到第一个字母后，寻找t的第二个字母的过程就是在$s$中$t$的第一个字母的位置后继续寻找第一次出现第二个字母的位置，以此类推，若是找不到，则操作数++，重新寻找</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100005</span>],t[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> nxt[<span class="number">100005</span>][<span class="number">26</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> n=<span class="built_in">strlen</span>(s+<span class="number">1</span>),m=<span class="built_in">strlen</span>(t+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[n][j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)nxt[i][j]=nxt[i+<span class="number">1</span>][j];</span><br><span class="line">            nxt[i][s[i+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>,ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">if</span>(!now)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                now=nxt[now][t[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                <span class="keyword">if</span>(!now)&#123;ans=<span class="number">-1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <h3 id="D-Same-GCDs"><a href="#D-Same-GCDs" class="headerlink" title="D Same GCDs"></a>D <a href="https://codeforces.com/contest/1295/problem/D">Same GCDs</a></h3><h5 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $</p>
 <h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>$gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$</p>
 <p>则原式可化为</p>
@@ -101,7 +127,7 @@
     <content><![CDATA[<h2 id="第一章-计算机网络体系结构"><a href="#第一章-计算机网络体系结构" class="headerlink" title="第一章 计算机网络体系结构"></a>第一章 计算机网络体系结构</h2><h3 id="1-1-计算机网络概述"><a href="#1-1-计算机网络概述" class="headerlink" title="1.1 计算机网络概述"></a>1.1 计算机网络概述</h3><p><strong>Q</strong>: 集线器是什么？</p>
 <p><strong>A</strong>：集线器是一款网络设备，将多条以太网双绞线或者光纤连接在同一段物理介质下。集线器会广播式发送数据，数据信息会被发送到每一个端口（不安全）; 各站点共享带宽，使得平均带宽减小；工作站不能同时发送和接受数据。</p>
 <p><strong>Q</strong>：<strong>网桥</strong>是什么？ （<strong>网桥也叫做桥接器</strong>）</p>
-<p><strong>A</strong>：网桥将两个相似的网络连接起来，并对网络数据的流通进行管理。它工作于<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82">数据链路层</a>，不但能扩展网络的距离或范围，而且可提高网络的性能、可靠性和安全性。网络1 和网络2 通过网桥连接后，网桥接收网络1 发送的数据包，检查数据包中的地址，如果地址属于网络1 ，它就将其放弃，相反，如果是网络2 的地址，它就继续发送给网络2.这样可利用网桥隔离信息，将同一个网络号划分成多个网段（属于同一个网络号），隔离出安全网段，防止其他网段内的用户非法访问。由于网络的分段，各网段相对独立（属于同一个网络号），一个网段的故障不会影响到另一个网段的运行。</p>
+<p><strong>A</strong>：网桥将两个相似的网络连接起来，并对网络数据的流通进行管理。它工作于<a href="https://baike.baidu.com/item/数据链路层">数据链路层</a>，不但能扩展网络的距离或范围，而且可提高网络的性能、可靠性和安全性。网络1 和网络2 通过网桥连接后，网桥接收网络1 发送的数据包，检查数据包中的地址，如果地址属于网络1 ，它就将其放弃，相反，如果是网络2 的地址，它就继续发送给网络2.这样可利用网桥隔离信息，将同一个网络号划分成多个网段（属于同一个网络号），隔离出安全网段，防止其他网段内的用户非法访问。由于网络的分段，各网段相对独立（属于同一个网络号），一个网段的故障不会影响到另一个网段的运行。</p>
 <p><strong>Q</strong>: 如何理解<strong>子网掩码</strong>？</p>
 <p><strong>A</strong>: <a href="https://www.zhihu.com/question/56895036">直接点链接</a></p>
 <p>附加一些个人理解：</p>
@@ -328,7 +354,7 @@
 </ul>
 </li>
 </ol>
-<ol start="2">
+<ol>
 <li><p>链路管理</p>
 <p>数据链路层连接的建立、维持和释放过程就称作链路管理，它主要用于面向连接的服务。</p>
 </li>
@@ -521,15 +547,23 @@
 <h5 id="以太网的传输介质和网卡"><a href="#以太网的传输介质和网卡" class="headerlink" title="以太网的传输介质和网卡"></a>以太网的传输介质和网卡</h5><p>传输介质有四种：粗缆、细缆、双绞线、光纤。</p>
 <blockquote>
 <p>计算机与外界局域网的连接是通过主机箱内插入一块网络接口板，又称为网络适配器或者网络接口卡。网卡上装有处理器和存储器，是工作在数据链路层的网络组件。网卡是局域网中连接计算机和传输介质的接口，不仅能实现与局域网传输介质之间的物理连接和电信号匹配，还涉及帧的发送与接受、帧的封装与拆封、介质访问控制、数据的编码与戒嘛以及数据缓存的功能等。</p>
-</blockquote>
-<blockquote>
 <p>全世界的每块网卡在出厂时都有一个唯一的代码，称为介质访问控制（MAC）地址，这个地址用于控制主机在网络上的数据通信。数据链路层设备（网桥、交换机等）都使用各个网卡的MAC地址。另外，网卡控制者主机对介质的访问，因此网卡也工作在物理层，因为它只关注比特，而不关注任何的地址信息和高层协议信息。</p>
 </blockquote>
 <p>以太网的MAX帧</p>
 <blockquote>
 <p>每一块网络适配器（网卡）有一个地址，也称物理地址。</p>
+<p>由于总线上使用的是广播通信，因此网卡从网络上每收到一个MAC帧，首先要用硬件检查MAC帧中的MAC地址。如果是发往本站的就收下，否则丢弃。</p>
 </blockquote>
-<h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>]]></content>
+<p>注意：MAC 帧并不需要帧结束符，因为以太网在传送帧时，各帧之间必须有一定的间隙。因此，接收端只要找到帧开始定界符，其后面连续到达的比特流就都数据同一个MAC帧。但不要误以为MAC帧不需要尾部，在数据链路层上，帧既要加首部，也要加尾部。</p>
+<p>包含内容：</p>
+<ul>
+<li>地址：6字节</li>
+<li>类型：2字节</li>
+<li>数据：46-1500 字节</li>
+<li>填充：0-46字节</li>
+<li>校验码（FCS）：4字节</li>
+</ul>
+<h4 id="数据链路层设备"><a href="#数据链路层设备" class="headerlink" title="数据链路层设备"></a>数据链路层设备</h4><h2 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章 网络层"></a>第四章 网络层</h2><h2 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章 传输层"></a>第五章 传输层</h2><h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2>]]></content>
   </entry>
   <entry>
     <title>markdown 从基础使用到进阶</title>
@@ -539,24 +573,30 @@
 </blockquote>
 <p><strong>使用 markdown 的时间也快两年了，在此重新补充一些新的markdown使用技巧，以帮助自己能够更方便地撰写文档。</strong></p>
 <h3 id="通过使用三个星号建立一个分割线"><a href="#通过使用三个星号建立一个分割线" class="headerlink" title="通过使用三个星号建立一个分割线"></a>通过使用三个星号建立一个分割线</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
-
 <table><tr><td bgcolor=lightblue><font color=red>效果如下：</td></tr></table>
 
 <hr>
 <h3 id="更改字体颜色"><a href="#更改字体颜色" class="headerlink" title="更改字体颜色"></a>更改字体颜色</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;</span><br><span class="line">&lt;font color=red&gt;我是红色&lt;/font&gt;</span><br><span class="line">&lt;font color=#008000&gt;我是绿色&lt;/font&gt;</span><br><span class="line">&lt;font color=Blue&gt;我是蓝色&lt;/font&gt;</span><br><span class="line">&lt;font size=5&gt;我是尺寸&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;黑体&quot; color=green size=5&gt;我是黑体，绿色，尺寸为5&lt;/font&gt;</span><br></pre></td></tr></table></figure>
-
 <table><tr><td bgcolor=lightblue><font color=red>效果如下：</td></tr></table>
 
-<p><font face="黑体">我是黑体字</font><br><font face="微软雅黑">我是微软雅黑</font><br><font face="STCAIYUN">我是华文彩云</font><br><font color=red>我是红色</font><br><font color=#008000>我是绿色</font><br><font color=Blue>我是蓝色</font><br><font size=5>我是尺寸</font><br><font face="黑体" color=green size=5>我是黑体，绿色，尺寸为5</font></p>
+<font face="黑体">我是黑体字</font>
+<font face="微软雅黑">我是微软雅黑</font>
+<font face="STCAIYUN">我是华文彩云</font>
+<font color=red>我是红色</font>
+<font color=#008000>我是绿色</font>
+<font color=Blue>我是蓝色</font>
+<font size=5>我是尺寸</font>
+<font face="黑体" color=green size=5>我是黑体，绿色，尺寸为5</font>
+
+
+
 <h3 id="为文字添加背景色"><a href="#为文字添加背景色" class="headerlink" title="为文字添加背景色"></a>为文字添加背景色</h3><p>由于 style 标签和标签的 style 属性不被支持，所以这里只能是借助 table, tr, td 等表格标签的 bgcolor 属性来实现背景色。故这里对于文字背景色的设置，只是将那一整行看作一个表格，更改了那个格子的背景色（bgcolor）。 语法：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;背景色yellow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure>
-
 <table><tr><td bgcolor=yellow>背景色yellow</td></tr></table>
 
 
 
 <h3 id="添加-html-类型的图片"><a href="#添加-html-类型的图片" class="headerlink" title="添加 html 类型的图片"></a>添加 html 类型的图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div align=&quot;center&quot;&gt;</span><br><span class="line">&lt;img src = &#x27;https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png&#x27; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
 <div align="center">
 <img src = 'https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png' />
 </div>
@@ -1292,6 +1332,64 @@
 ]]></content>
   </entry>
   <entry>
+    <title>git 学习笔记</title>
+    <url>/2021/09/26/blog6/</url>
+    <content><![CDATA[<font color=FF0000> **目的：**</font> 掌握常见情景下的 git 命令
+
+
+
+<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
+
+
+ **Ans**: 保持 git pull 的好习惯 即可。
+
+
+
+<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
+
+
+**Ans**: 参考[链接](https://blog.csdn.net/qq_23274715/article/details/112911355)做出回答:
+
+合并多个commit的情景可分为以下两种情况：
+
+* 要合并的**所有**commit都还没有push到**远程仓库**。
+
+* **有些**commit已经**push**到了远程仓库。
+
+对于 <font color=009100>**情况一**</font>，可以采用如下策略解决
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
+
+或者可以使用 git rebase 解决（后续有时间，再详细介绍了）
+
+对于 <font color=009100>**情况二**</font>，可以考虑使用以下策略解决
+
+1. 首先保证要推送的分支与本地分支**同步**。
+
+2. 使用上面提到的方式任意一种进行commit的**合并**。
+
+3. 使用git push --force-with-lease origin dev的方式强制**推送**。
+
+> <font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的"Settings" -> “Repository” -> scroll down to “Protected branches”.然后再推送。</font>
+
+
+
+<table><tr><td bgcolor=lightblue><font color=000000>情景三： 主分支更新后，如何合并新的更新到自己的xx分支？</td></tr></table>
+
+
+
+
+
+<table><tr><td bgcolor=lightblue><font color=000000>情景四: 一个小疑惑，已经解决</td></tr></table>
+
+<p>以下两种操作是否等价？ 等价</p>
+<p>A：拉代码，改代码，新建分支，push到新分支</p>
+<p>B：拉代码，新建分支，改代码，push到新分支</p>
+<font color=#000079>               <未完待续--------------------------------------------------------> 最后编辑于 2021.9.26  10:35 </font> 
+
+]]></content>
+  </entry>
+  <entry>
     <title>论文笔记模板</title>
     <url>/2021/09/27/blog7/</url>
     <content><![CDATA[<h3 id="阅读笔记模板"><a href="#阅读笔记模板" class="headerlink" title="阅读笔记模板"></a>阅读笔记模板</h3><h1 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h1><h3 id="2016-CVPR（时间-，会议）"><a href="#2016-CVPR（时间-，会议）" class="headerlink" title="2016 CVPR（时间 ，会议）"></a>2016 CVPR（时间 ，会议）</h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
@@ -1315,61 +1413,13 @@
   <entry>
     <title>GIRAFFE:Representing Scenes as Compositional Generative Neural Feature Fields</title>
     <url>/2021/09/27/blog8/</url>
-    <content><![CDATA[<h1 id="GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields"><a href="#GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields" class="headerlink" title="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"></a>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1><h3 id="CVPR-2021-oral-best-paper-award"><a href="#CVPR-2021-oral-best-paper-award" class="headerlink" title="CVPR 2021 (oral, best paper award)"></a><a href="https://arxiv.org/abs/2011.12100">CVPR 2021 (oral, <strong>best paper award</strong>)</a></h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+    <content><![CDATA[<h1 id="GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields"><a href="#GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields" class="headerlink" title="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"></a>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1><h3 id="CVPR-2021-oral-best-paper-award"><a href="#CVPR-2021-oral-best-paper-award" class="headerlink" title="CVPR 2021 (oral, best paper award)"></a><a href="https://arxiv.org/abs/2011.12100">CVPR 2021 (oral, <strong>best paper award</strong>)</a></h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id=""><a href="#" class="headerlink" title=""></a> </h3>]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
       <tags>
         <tag>cvpr</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>git 学习笔记</title>
-    <url>/2021/09/26/blog6/</url>
-    <content><![CDATA[<p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
-
-
-<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
-<table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
-
-
-<p><strong>Ans</strong>: 参考<a href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
-<p>合并多个commit的情景可分为以下两种情况：</p>
-<ul>
-<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
-</li>
-<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
-</li>
-</ul>
-<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
-
-<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
-<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
-<ol>
-<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
-</li>
-<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
-</li>
-<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
-</li>
-</ol>
-<blockquote>
-<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
-</blockquote>
-<table><tr><td bgcolor=lightblue><font color=000000>情景三： 主分支更新后，如何合并新的更新到自己的xx分支？</td></tr></table>
-
-
-
-
-
-
-
-
-
-<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
-]]></content>
   </entry>
   <entry>
     <title>函数指针和指针函数</title>

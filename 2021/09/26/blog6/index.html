@@ -10,12 +10,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content=" 目的： 掌握常见情景下的 git 命令
+    <meta name="description" content=" **目的：** 掌握常见情景下的 git 命令
+
+
+
 情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？
 
 
- Ans: 保持 git pull 的好习惯 即可。
-情景二：单个,"> 
+ **Ans**: 保持 git pull 的好习惯,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -62,49 +64,59 @@
 
         </div>
         <div class="content markdown">
-            <p><font color=FF0000> <strong>目的：</strong></font> 掌握常见情景下的 git 命令</p>
+            <font color=FF0000> **目的：**</font> 掌握常见情景下的 git 命令
+
+
+
 <table><tr><td bgcolor=lightblue><font color=000000>情景一：在 A 电脑端更新了 xx库中的 yy 分支， 在 B 电脑端如何更新代码？</td></tr></table>
 
 
-<p> <strong>Ans</strong>: 保持 git pull 的好习惯 即可。</p>
+ **Ans**: 保持 git pull 的好习惯 即可。
+
+
+
 <table><tr><td bgcolor=lightblue><font color=000000>情景二：单个分支提交了多个commit,如何进行合并，简化代码？</td></tr></table>
 
 
-<p><strong>Ans</strong>: 参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23274715/article/details/112911355">链接</a>做出回答:</p>
-<p>合并多个commit的情景可分为以下两种情况：</p>
-<ul>
-<li><p>要合并的<strong>所有</strong>commit都还没有push到<strong>远程仓库</strong>。</p>
-</li>
-<li><p><strong>有些</strong>commit已经<strong>push</strong>到了远程仓库。</p>
-</li>
-</ul>
-<p>对于 <font color=009100><strong>情况一</strong></font>，可以采用如下策略解决</p>
+**Ans**: 参考[链接](https://blog.csdn.net/qq_23274715/article/details/112911355)做出回答:
+
+合并多个commit的情景可分为以下两种情况：
+
+* 要合并的**所有**commit都还没有push到**远程仓库**。
+
+* **有些**commit已经**push**到了远程仓库。
+
+对于 <font color=009100>**情况一**</font>，可以采用如下策略解决
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git log # 查看要合并的commit.记住最早的commit号。</span><br><span class="line">git reset commit_number # 回退到此commit号。因为没有使用--hard,所以内容都保存在工作区。</span><br><span class="line">git add . 将回退的的内容再次添加到暂存区</span><br><span class="line">git commit -m &quot;comment&quot;</span><br></pre></td></tr></table></figure>
 
-<p>或者可以使用 git rebase 解决（后续有时间，再详细介绍了）</p>
-<p>对于 <font color=009100><strong>情况二</strong></font>，可以考虑使用以下策略解决</p>
-<ol>
-<li><p>首先保证要推送的分支与本地分支<strong>同步</strong>。</p>
-</li>
-<li><p>使用上面提到的方式任意一种进行commit的<strong>合并</strong>。</p>
-</li>
-<li><p>使用git push –force-with-lease origin dev的方式强制<strong>推送</strong>。</p>
-</li>
-</ol>
-<blockquote>
-<p><font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的”Settings” -&gt; “Repository” -&gt; scroll down to “Protected branches”.然后再推送。</font></p>
-</blockquote>
+或者可以使用 git rebase 解决（后续有时间，再详细介绍了）
+
+对于 <font color=009100>**情况二**</font>，可以考虑使用以下策略解决
+
+1. 首先保证要推送的分支与本地分支**同步**。
+
+2. 使用上面提到的方式任意一种进行commit的**合并**。
+
+3. 使用git push --force-with-lease origin dev的方式强制**推送**。
+
+> <font color=#0066CC>注意：如果推送的是主分支master,也可能会推送失败，并提示(You are not allowed to force push code to a protected branch on this project.)这是由于gitlab等服务器设置了主分支保护造成的。可以设置gitlab的"Settings" -> “Repository” -> scroll down to “Protected branches”.然后再推送。</font>
+
+
+
 <table><tr><td bgcolor=lightblue><font color=000000>情景三： 主分支更新后，如何合并新的更新到自己的xx分支？</td></tr></table>
 
 
 
 
 
+<table><tr><td bgcolor=lightblue><font color=000000>情景四: 一个小疑惑，已经解决</td></tr></table>
 
+<p>以下两种操作是否等价？ 等价</p>
+<p>A：拉代码，改代码，新建分支，push到新分支</p>
+<p>B：拉代码，新建分支，改代码，push到新分支</p>
+<font color=#000079>               <未完待续--------------------------------------------------------> 最后编辑于 2021.9.26  10:35 </font> 
 
-
-
-<p><font color=#000079>               &lt;未完待续——————————————————–&gt; 最后编辑于 2021.9.26  10:35 </font> </p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

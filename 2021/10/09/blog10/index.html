@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GIRAFFE:Representing Scenes as Compositional Generative Neural Feature Fields - Hexo</title>
+    <title>cifra10_dl - Hexo</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature FieldsCVPR 2021 (oral, best,"> 
+    <meta name="description" content="cifra10_dl选择深度学习框架： PyTorch
+数据集：CIFAR-10 数据集
+
+数据集介绍：该数据集共有60000张彩色图像，这些图像是32*32，分为10个类，每类6000张图。这里面,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -35,7 +38,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">GIRAFFE:Representing Scenes as Compositional Generative Neural Feature Fields</h3>
+    <h3 class="subtitle">cifra10_dl</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -50,16 +53,37 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">GIRAFFE:Representing Scenes as Compositional Generative Neural Feature Fields</h1>
+        <h1 class="title">cifra10_dl</h1>
         <div class="stuff">
-            <span>九月 27, 2021</span>
+            <span>十月 09, 2021</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/cvpr/" rel="tag">cvpr</a></li></ul>
-
 
         </div>
         <div class="content markdown">
-            <h1 id="GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields"><a href="#GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields" class="headerlink" title="GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields"></a>GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</h1><h3 id="CVPR-2021-oral-best-paper-award"><a href="#CVPR-2021-oral-best-paper-award" class="headerlink" title="CVPR 2021 (oral, best paper award)"></a><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2011.12100">CVPR 2021 (oral, <strong>best paper award</strong>)</a></h3><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4.Evaluation"></a>4.Evaluation</h2><h3 id=""><a href="#" class="headerlink" title=""></a> </h3>
+            <h1 id="cifra10-dl"><a href="#cifra10-dl" class="headerlink" title="cifra10_dl"></a>cifra10_dl</h1><p>选择深度学习框架： PyTorch</p>
+<p>数据集：CIFAR-10 数据集</p>
+<blockquote>
+<p>数据集介绍：该数据集共有60000张彩色图像，这些图像是32*32，分为10个类，每类6000张图。这里面有50000张用于训练，构成了5个训练批，每一批10000张图；另外10000用于测试，单独构成一批。测试批的数据里，取自10类中的每一类，每一类随机取1000张。抽剩下的就随机排列组成了训练批。注意一个训练批中的各类图像并不一定数量相同，总的来看训练批，每一类都有5000张图。</p>
+</blockquote>
+<p>实验目的： 通过调整网络结构，参数等方式，记录结果的变化情况。</p>
+<p>步骤：</p>
+<p>得到归一化值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rgb_mean = np.mean(trainset.train_data, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))/<span class="number">255</span></span><br><span class="line">rgb_std = np.std(trainset.train_data, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))/<span class="number">255</span></span><br><span class="line">rgb_mean ,rgb_std </span><br></pre></td></tr></table></figure>
+<p>介绍网络：</p>
+<p>我这个项目要表达哪些内容：</p>
+<ul>
+<li>模型推理前的所有步骤，为什么这么做</li>
+<li>模型结果整理</li>
+<li>模型主要尝试了哪些方向，这些方向的结果都是什么？（写代码，记录答案，第一次尝试，第二次尝试，必要可放在一个py文件中）</li>
+<li>总结</li>
+</ul>
+<p>数据集预处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">transform_train = transforms.Compose([</span><br><span class="line">    transforms.RandomCrop(<span class="number">32</span>, padding=<span class="number">4</span>),</span><br><span class="line">    transforms.RandomHorizontalFlip(),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.4914</span>, <span class="number">0.4822</span>, <span class="number">0.4465</span>), (<span class="number">0.2023</span>, <span class="number">0.1994</span>, <span class="number">0.2010</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">transform_test = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.4914</span>, <span class="number">0.4822</span>, <span class="number">0.4465</span>), (<span class="number">0.2023</span>, <span class="number">0.1994</span>, <span class="number">0.2010</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">trainset = torchvision.datasets.CIFAR10(</span><br><span class="line">    root=<span class="string">&#x27;./data&#x27;</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform_train)</span><br><span class="line">trainloader = torch.utils.data.DataLoader(</span><br><span class="line">    trainset, batch_size=<span class="number">128</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">testset = torchvision.datasets.CIFAR10(</span><br><span class="line">    root=<span class="string">&#x27;./data&#x27;</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform_test)</span><br><span class="line">testloader = torch.utils.data.DataLoader(</span><br><span class="line">    testset, batch_size=<span class="number">100</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">classes = (<span class="string">&#x27;plane&#x27;</span>, <span class="string">&#x27;car&#x27;</span>, <span class="string">&#x27;bird&#x27;</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;deer&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;frog&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>, <span class="string">&#x27;ship&#x27;</span>, <span class="string">&#x27;truck&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=args.lr,</span><br><span class="line">                      momentum=0.9, weight_decay=5e-4)</span><br><span class="line">scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)</span><br></pre></td></tr></table></figure>
+<p>训练过程：</p>
+<p>测试过程：</p>
+<p>结果：</p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -94,7 +118,7 @@
     </div>
     
         <div class='side'>
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GIRAFFE-Representing-Scenes-as-Compositional-Generative-Neural-Feature-Fields"><span class="toc-number">1.</span> <span class="toc-text">GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CVPR-2021-oral-best-paper-award"><span class="toc-number">1.0.1.</span> <span class="toc-text">CVPR 2021 (oral, best paper award)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.2.</span> <span class="toc-text">1.Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Related-work"><span class="toc-number">1.3.</span> <span class="toc-text">2.Related work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Approach"><span class="toc-number">1.4.</span> <span class="toc-text">3.Approach</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Evaluation"><span class="toc-number">1.5.</span> <span class="toc-text">4.Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.1.</span> <span class="toc-text"> </span></a></li></ol></li></ol></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cifra10-dl"><span class="toc-number">1.</span> <span class="toc-text">cifra10_dl</span></a></li></ol>	
         </div>
     
 </div>
