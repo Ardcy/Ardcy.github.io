@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>计算机操作系统学习笔记（一） - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="#计算机操作系统
+第四章 文件管理4.1 文件系统基础4.1.1 文件的概念1. 文件的定义文件是以计算机硬盘为载体的存储在计算机上的信息集合，文件可以是文本文档、图片、程序等。
+在系统运行时，计算,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    
+<div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">计算机操作系统学习笔记（一）</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">计算机操作系统学习笔记（一）</h1>
+        <div class="stuff">
+            <span>十月 10, 2021</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>#计算机操作系统</p>
+<h2 id="第四章-文件管理"><a href="#第四章-文件管理" class="headerlink" title="第四章 文件管理"></a>第四章 文件管理</h2><h3 id="4-1-文件系统基础"><a href="#4-1-文件系统基础" class="headerlink" title="4.1 文件系统基础"></a>4.1 文件系统基础</h3><h4 id="4-1-1-文件的概念"><a href="#4-1-1-文件的概念" class="headerlink" title="4.1.1 文件的概念"></a>4.1.1 文件的概念</h4><h5 id="1-文件的定义"><a href="#1-文件的定义" class="headerlink" title="1. 文件的定义"></a>1. 文件的定义</h5><p>文件是以计算机硬盘为载体的存储在计算机上的信息集合，文件可以是文本文档、图片、程序等。</p>
+<p>在系统运行时，计算机以进程为基本程序为基本单位进行资源的调度和分配；而在用户进行的输入、输出中，则以文件为基本单位。</p>
+<p>操作系统中的文件系统就是用于实现用户的这些管理要求的。</p>
+<p><strong>文件结构</strong></p>
+<ul>
+<li>数据项<ul>
+<li>基本数据项</li>
+<li>组合数据项</li>
+</ul>
+</li>
+<li>记录</li>
+<li>文件<ul>
+<li>有结构文件</li>
+<li>无结构文件（二进制文件等）又称流式文件</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-文件的属性"><a href="#2-文件的属性" class="headerlink" title="2. 文件的属性"></a>2. 文件的属性</h5><ul>
+<li>名称</li>
+<li>标识符</li>
+<li>类型</li>
+<li>位置</li>
+<li>大小</li>
+<li>保护</li>
+<li>时间、日期和用户标识</li>
+</ul>
+<h5 id="3-文件的基本操作"><a href="#3-文件的基本操作" class="headerlink" title="3. 文件的基本操作"></a>3. 文件的基本操作</h5><ul>
+<li>创建文件</li>
+<li>写文件</li>
+<li>读文件</li>
+<li>文件重定位 （按某条件搜索目录，将当前文件位置设为给定值，不会读写文件）</li>
+<li>删除文件</li>
+<li>截断文件（文件所有属性不变，删除文件内容）</li>
+</ul>
+<h5 id="4-文件的打开和关闭"><a href="#4-文件的打开和关闭" class="headerlink" title="4. 文件的打开和关闭"></a>4. 文件的打开和关闭</h5><p>因为许多文件操作都涉及为给定文件搜索相关目录条目，因此许多系统要求在首次使用文件时，使用系统调用open将指明文件的属性（包括外存上的物理位置）从外存复制到内存打开文件表的一个表目中，并将该表目的编号返回给用户。</p>
+<h4 id="4-1-2-文件的逻辑结构"><a href="#4-1-2-文件的逻辑结构" class="headerlink" title="4.1.2 文件的逻辑结构"></a>4.1.2 文件的逻辑结构</h4><p>文件的逻辑结构是从用户观点出发看到的文件的组织形式。</p>
+<p>按逻辑结构，文件可划分为无结构文件和有结构文件两种。</p>
+<h5 id="1-无结构文件（流式文件）"><a href="#1-无结构文件（流式文件）" class="headerlink" title="1. 无结构文件（流式文件）"></a>1. 无结构文件（流式文件）</h5><h5 id="2-有结构文件"><a href="#2-有结构文件" class="headerlink" title="2. 有结构文件"></a>2. 有结构文件</h5><ul>
+<li><p>顺序文件</p>
+</li>
+<li><p>索引文件</p>
+<p>索引表本身是定长记录的顺序文件。</p>
+</li>
+<li><p>索引顺序文件</p>
+<p>索引顺序文件将顺序文件中的所有记录分为若干组，为顺序文件建立一张索引表，在索引表中为每组中的第一条记录建立一个索引项，其中含有该记录的关键字值和指向该记录的指针。</p>
+</li>
+<li><p>直接文件或散列文件。</p>
+<p>给定记录的键值或通过散列函数转换的键值直接决定记录的物理地址。</p>
+</li>
+</ul>
+<h4 id="4-1-3-目录结构"><a href="#4-1-3-目录结构" class="headerlink" title="4.1.3 目录结构"></a>4.1.3 目录结构</h4><p>文件目录包含有关文件的信息、位置和所有权等，这些信息主要由操作系统进行管理。首先我们来看目录管理的基本要求： 按名存取、检索速度，提供用于控制访问文件的信息。</p>
+<h5 id="1-文件控制块和索引节点"><a href="#1-文件控制块和索引节点" class="headerlink" title="1. 文件控制块和索引节点"></a>1. 文件控制块和索引节点</h5><ul>
+<li><p>文件控制块。（FCB）</p>
+<p>FCB的有序集合称为文件目录，1个FCB就是一个文件目录项。</p>
+<p>FCB主要包括以下信息。</p>
+<ul>
+<li>基本信息</li>
+<li>存取控制信息</li>
+<li>使用信息</li>
+</ul>
+</li>
+<li><p>索引结点</p>
+<p>文件被打开时，磁盘索引节点复制到内存的索引节点中，以便于使用。</p>
+</li>
+</ul>
+<blockquote>
+<p>FCB 或者 索引节点相当于图书馆中图书的索书号，我们可以在图书馆网站上找到图书的索书号，然后根据索书号找到想要的书本</p>
+</blockquote>
+<h5 id="2-目录结构"><a href="#2-目录结构" class="headerlink" title="2. 目录结构"></a>2. 目录结构</h5><p>所需要执行的操作：</p>
+<ul>
+<li>搜索</li>
+<li>创建文件</li>
+<li>删除文件</li>
+<li>显示目录</li>
+<li>修改目录</li>
+</ul>
+<p>操作时，考虑以下几种目录结构：</p>
+<ul>
+<li>单级目录结构</li>
+<li>两级目录结构</li>
+<li>多级目录结构（树形目录结构）</li>
+<li>无环图目录结构</li>
+</ul>
+<h4 id="4-1-4-文件共享"><a href="#4-1-4-文件共享" class="headerlink" title="4.1.4 文件共享"></a>4.1.4 文件共享</h4><h5 id="1-基于索引节点的共享方式（硬链接）"><a href="#1-基于索引节点的共享方式（硬链接）" class="headerlink" title="1.基于索引节点的共享方式（硬链接）"></a>1.基于索引节点的共享方式（硬链接）</h5><h5 id="2-利用符号链实现文件共享（软链接）"><a href="#2-利用符号链实现文件共享（软链接）" class="headerlink" title="2. 利用符号链实现文件共享（软链接）"></a>2. 利用符号链实现文件共享（软链接）</h5><p>利用符号链方式实现文件共享时，只有文件的拥有者才拥有指向其索引节点的指针。而共享该文件的其他用户只有该文件的路径名，并不拥有指向其索引结点的指针。</p>
+<h4 id="4-1-5-文件保护"><a href="#4-1-5-文件保护" class="headerlink" title="4.1.5 文件保护"></a>4.1.5 文件保护</h4><h5 id="1-访问类型"><a href="#1-访问类型" class="headerlink" title="1. 访问类型"></a>1. 访问类型</h5><ul>
+<li>读</li>
+<li>写</li>
+<li>执行。将文件装入内存并执行</li>
+<li>添加。将新信息添加到文件结尾部分</li>
+<li>删除。删除文件，释放空间。</li>
+<li>列表清单。列出文件名和文件属性。</li>
+</ul>
+<h5 id="2-访问控制"><a href="#2-访问控制" class="headerlink" title="2. 访问控制"></a>2. 访问控制</h5><p>解决访问控制最常用的方式是根据用户身份进行控制，而实现基于身份访问的最普通的方式是，为每个文件和目录增加一个访问控制列表，依规定每个用户名以及其所允许的访问类型。</p>
+<h5 id="3-加密控制"><a href="#3-加密控制" class="headerlink" title="3. 加密控制"></a>3. 加密控制</h5><h5 id="4-口令保护"><a href="#4-口令保护" class="headerlink" title="4. 口令保护"></a>4. 口令保护</h5><h3 id="4-2-文件系统实现"><a href="#4-2-文件系统实现" class="headerlink" title="4.2 文件系统实现"></a>4.2 文件系统实现</h3><p>介绍文件物理结构和目录的实现</p>
+<h4 id="4-2-1-文件系统层次结构"><a href="#4-2-1-文件系统层次结构" class="headerlink" title="4.2.1 文件系统层次结构"></a>4.2.1 文件系统层次结构</h4><ul>
+<li>用户调用接口</li>
+<li>文件目录系统</li>
+<li>存取控制验证模块</li>
+<li>逻辑文件系统与文件信息缓冲区</li>
+<li>物理文件系统</li>
+<li>辅助分配模块</li>
+<li>设备管理程序模块</li>
+</ul>
+<h4 id="4-2-2-目录实现"><a href="#4-2-2-目录实现" class="headerlink" title="4.2.2 目录实现"></a>4.2.2 目录实现</h4><p>目录的实现就是为了查找。</p>
+<p>目录实现的基本方法有线性列表和哈希表两种。</p>
+<h4 id="4-2-3-文件实现"><a href="#4-2-3-文件实现" class="headerlink" title="4.2.3 文件实现"></a>4.2.3 文件实现</h4><p>文件的实现就是研究文件的物理结构，即文件数据在物理存储设备上是如何分布和组织的。同一个问题有两个方面的回答：一是文件的分配方式，讲的是对磁盘非空闲块的管理；二是文件存储空间管理，讲的是对磁盘空闲块的管理。</p>
+<h5 id="1-文件分配方式"><a href="#1-文件分配方式" class="headerlink" title="1. 文件分配方式"></a>1. 文件分配方式</h5><p>讲的是如何为文件分配磁盘块。</p>
+<ul>
+<li><p>连续分配</p>
+</li>
+<li><p>链接分配</p>
+<p>采取离散分配的方式，消除了外部碎片，显著提高了磁盘空间的利用率。</p>
+<ul>
+<li>隐式链接（链式搜索）</li>
+<li>显式链接（把链上的指针提取出来，构建FAT文件分配表，加快了检索速度，减少了访问磁盘次数）</li>
+</ul>
+</li>
+<li><p>索引分配</p>
+<p>链接分配方式解决了连续分配的外部碎片和文件大小管理的问题。但是，链接分配不能有效支持直接访问。（FAT除外）。</p>
+</li>
+</ul>
+<h5 id="2-文件存储空间管理"><a href="#2-文件存储空间管理" class="headerlink" title="2. 文件存储空间管理"></a>2. 文件存储空间管理</h5><p>文件存储器空间的划分与初始化。</p>
+<p>在一个文件卷中，文件数据信息的空间（文件区）和存放控制信息FCB的空间（目录区）是分离的。</p>
+<p>文件存储器空间管理。</p>
+<p>文件存储设备的管理实质上是对空闲块的组织和管理，它包括空闲块的组织和回收等问题。</p>
+<p>（1）空闲表法</p>
+<p>​    连续分配方式</p>
+<p>（2）空闲链表法</p>
+<p>（3）位示图法</p>
+<p>（4）成组链接法</p>
+<p>​    空闲表法和空闲链表法都不太适用于大型文件系统，因为这会使空闲表或者空闲链表太大。在UNIX系统中采用的是成组链接法，这种方法结合了空闲表和空闲链表两种方式，克服了表大的问题。 </p>
+<h3 id="4-3-磁盘组织与管理"><a href="#4-3-磁盘组织与管理" class="headerlink" title="4.3 磁盘组织与管理"></a>4.3 磁盘组织与管理</h3><p>本节主要介绍文件系统管理磁盘的方式。</p>
+<h4 id="4-3-1-磁盘的结构"><a href="#4-3-1-磁盘的结构" class="headerlink" title="4.3.1 磁盘的结构"></a>4.3.1 磁盘的结构</h4><h4 id="4-3-2-磁盘调度算法"><a href="#4-3-2-磁盘调度算法" class="headerlink" title="4.3.2 磁盘调度算法"></a>4.3.2 磁盘调度算法</h4><h4 id="4-3-3-磁盘的管理"><a href="#4-3-3-磁盘的管理" class="headerlink" title="4.3.3 磁盘的管理"></a>4.3.3 磁盘的管理</h4>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='bbbcedd212fd8db72b81'
+        data-cs='54e10030c2e765a96c0649f988acef2bf6a400f9'
+        data-r='comment'
+        data-o='Ardcy'
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">第四章 文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">4.1 文件系统基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-%E6%96%87%E4%BB%B6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">4.1.1 文件的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1. 文件的定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">2. 文件的属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">3. 文件的基本操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%93%E5%BC%80%E5%92%8C%E5%85%B3%E9%97%AD"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">4. 文件的打开和关闭</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">4.1.2 文件的逻辑结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%97%A0%E7%BB%93%E6%9E%84%E6%96%87%E4%BB%B6%EF%BC%88%E6%B5%81%E5%BC%8F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1. 无结构文件（流式文件）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%9C%89%E7%BB%93%E6%9E%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2. 有结构文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-3-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">4.1.3 目录结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E6%8E%A7%E5%88%B6%E5%9D%97%E5%92%8C%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">1. 文件控制块和索引节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">2. 目录结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-4-%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="toc-number">1.1.4.</span> <span class="toc-text">4.1.4 文件共享</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%B9%E5%BC%8F%EF%BC%88%E7%A1%AC%E9%93%BE%E6%8E%A5%EF%BC%89"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.基于索引节点的共享方式（硬链接）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%88%A9%E7%94%A8%E7%AC%A6%E5%8F%B7%E9%93%BE%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%EF%BC%88%E8%BD%AF%E9%93%BE%E6%8E%A5%EF%BC%89"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">2. 利用符号链实现文件共享（软链接）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-5-%E6%96%87%E4%BB%B6%E4%BF%9D%E6%8A%A4"><span class="toc-number">1.1.5.</span> <span class="toc-text">4.1.5 文件保护</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%AE%BF%E9%97%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">1. 访问类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">2. 访问控制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%8A%A0%E5%AF%86%E6%8E%A7%E5%88%B6"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">3. 加密控制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%8F%A3%E4%BB%A4%E4%BF%9D%E6%8A%A4"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">4. 口令保护</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.</span> <span class="toc-text">4.2 文件系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">4.2.1 文件系统层次结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E7%9B%AE%E5%BD%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">4.2.2 目录实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-3-%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.3.</span> <span class="toc-text">4.2.3 文件实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">1. 文件分配方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2. 文件存储空间管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E7%A3%81%E7%9B%98%E7%BB%84%E7%BB%87%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">4.3 磁盘组织与管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1-%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">4.3.1 磁盘的结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-2-%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">4.3.2 磁盘调度算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-3-%E7%A3%81%E7%9B%98%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">4.3.3 磁盘的管理</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

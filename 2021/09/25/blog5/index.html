@@ -15,7 +15,8 @@
 
 使用 markdown 的时间也快两年了，在此重新补充一些新的markdown使用技巧，以帮助自己能够更方便地撰写文档。
 通过使用三个星号建立一个分割线1***
-效果如,"> 
+
+效果,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -67,30 +68,24 @@
 </blockquote>
 <p><strong>使用 markdown 的时间也快两年了，在此重新补充一些新的markdown使用技巧，以帮助自己能够更方便地撰写文档。</strong></p>
 <h3 id="通过使用三个星号建立一个分割线"><a href="#通过使用三个星号建立一个分割线" class="headerlink" title="通过使用三个星号建立一个分割线"></a>通过使用三个星号建立一个分割线</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
+
 <table><tr><td bgcolor=lightblue><font color=red>效果如下：</td></tr></table>
 
 <hr>
 <h3 id="更改字体颜色"><a href="#更改字体颜色" class="headerlink" title="更改字体颜色"></a>更改字体颜色</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;</span><br><span class="line">&lt;font color=red&gt;我是红色&lt;/font&gt;</span><br><span class="line">&lt;font color=#008000&gt;我是绿色&lt;/font&gt;</span><br><span class="line">&lt;font color=Blue&gt;我是蓝色&lt;/font&gt;</span><br><span class="line">&lt;font size=5&gt;我是尺寸&lt;/font&gt;</span><br><span class="line">&lt;font face=&quot;黑体&quot; color=green size=5&gt;我是黑体，绿色，尺寸为5&lt;/font&gt;</span><br></pre></td></tr></table></figure>
+
 <table><tr><td bgcolor=lightblue><font color=red>效果如下：</td></tr></table>
 
-<font face="黑体">我是黑体字</font>
-<font face="微软雅黑">我是微软雅黑</font>
-<font face="STCAIYUN">我是华文彩云</font>
-<font color=red>我是红色</font>
-<font color=#008000>我是绿色</font>
-<font color=Blue>我是蓝色</font>
-<font size=5>我是尺寸</font>
-<font face="黑体" color=green size=5>我是黑体，绿色，尺寸为5</font>
-
-
-
+<p><font face="黑体">我是黑体字</font><br><font face="微软雅黑">我是微软雅黑</font><br><font face="STCAIYUN">我是华文彩云</font><br><font color=red>我是红色</font><br><font color=#008000>我是绿色</font><br><font color=Blue>我是蓝色</font><br><font size=5>我是尺寸</font><br><font face="黑体" color=green size=5>我是黑体，绿色，尺寸为5</font></p>
 <h3 id="为文字添加背景色"><a href="#为文字添加背景色" class="headerlink" title="为文字添加背景色"></a>为文字添加背景色</h3><p>由于 style 标签和标签的 style 属性不被支持，所以这里只能是借助 table, tr, td 等表格标签的 bgcolor 属性来实现背景色。故这里对于文字背景色的设置，只是将那一整行看作一个表格，更改了那个格子的背景色（bgcolor）。 语法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;背景色yellow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
 <table><tr><td bgcolor=yellow>背景色yellow</td></tr></table>
 
 
 
 <h3 id="添加-html-类型的图片"><a href="#添加-html-类型的图片" class="headerlink" title="添加 html 类型的图片"></a>添加 html 类型的图片</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align=&quot;center&quot;&gt;</span><br><span class="line">&lt;img src = &#x27;https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png&#x27; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
 <div align="center">
 <img src = 'https://s3.bmp.ovh/imgs/2021/09/afed30d2caa2fd1c.png' />
 </div>

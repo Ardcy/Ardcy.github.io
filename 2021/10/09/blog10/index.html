@@ -10,10 +10,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="cifra10_dl选择深度学习框架： PyTorch
+    <meta name="description" content="#cifra10_dl
+选择深度学习框架： PyTorch
 数据集：CIFAR-10 数据集
 
-数据集介绍：该数据集共有60000张彩色图像，这些图像是32*32，分为10个类，每类6000张图。这里面,"> 
+数据集介绍：该数据集共有60000张彩色图像，这些图像是32*32，分为10个类，每类6000张图。这,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -60,7 +61,8 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="cifra10-dl"><a href="#cifra10-dl" class="headerlink" title="cifra10_dl"></a>cifra10_dl</h1><p>选择深度学习框架： PyTorch</p>
+            <p>#cifra10_dl</p>
+<p>选择深度学习框架： PyTorch</p>
 <p>数据集：CIFAR-10 数据集</p>
 <blockquote>
 <p>数据集介绍：该数据集共有60000张彩色图像，这些图像是32*32，分为10个类，每类6000张图。这里面有50000张用于训练，构成了5个训练批，每一批10000张图；另外10000用于测试，单独构成一批。测试批的数据里，取自10类中的每一类，每一类随机取1000张。抽剩下的就随机排列组成了训练批。注意一个训练批中的各类图像并不一定数量相同，总的来看训练批，每一类都有5000张图。</p>
@@ -69,6 +71,9 @@
 <p>步骤：</p>
 <p>得到归一化值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rgb_mean = np.mean(trainset.train_data, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))/<span class="number">255</span></span><br><span class="line">rgb_std = np.std(trainset.train_data, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))/<span class="number">255</span></span><br><span class="line">rgb_mean ,rgb_std </span><br></pre></td></tr></table></figure>
+
+
+
 <p>介绍网络：</p>
 <p>我这个项目要表达哪些内容：</p>
 <ul>
@@ -79,10 +84,19 @@
 </ul>
 <p>数据集预处理</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">transform_train = transforms.Compose([</span><br><span class="line">    transforms.RandomCrop(<span class="number">32</span>, padding=<span class="number">4</span>),</span><br><span class="line">    transforms.RandomHorizontalFlip(),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.4914</span>, <span class="number">0.4822</span>, <span class="number">0.4465</span>), (<span class="number">0.2023</span>, <span class="number">0.1994</span>, <span class="number">0.2010</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">transform_test = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.4914</span>, <span class="number">0.4822</span>, <span class="number">0.4465</span>), (<span class="number">0.2023</span>, <span class="number">0.1994</span>, <span class="number">0.2010</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">trainset = torchvision.datasets.CIFAR10(</span><br><span class="line">    root=<span class="string">&#x27;./data&#x27;</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform_train)</span><br><span class="line">trainloader = torch.utils.data.DataLoader(</span><br><span class="line">    trainset, batch_size=<span class="number">128</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">testset = torchvision.datasets.CIFAR10(</span><br><span class="line">    root=<span class="string">&#x27;./data&#x27;</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform_test)</span><br><span class="line">testloader = torch.utils.data.DataLoader(</span><br><span class="line">    testset, batch_size=<span class="number">100</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">classes = (<span class="string">&#x27;plane&#x27;</span>, <span class="string">&#x27;car&#x27;</span>, <span class="string">&#x27;bird&#x27;</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;deer&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;frog&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>, <span class="string">&#x27;ship&#x27;</span>, <span class="string">&#x27;truck&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=args.lr,</span><br><span class="line">                      momentum=0.9, weight_decay=5e-4)</span><br><span class="line">scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <p>训练过程：</p>
 <p>测试过程：</p>
 <p>结果：</p>
+<h4 id="图片数据归一化处理"><a href="#图片数据归一化处理" class="headerlink" title="图片数据归一化处理"></a>图片数据归一化处理</h4><p>如果输入层x</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -118,7 +132,7 @@
     </div>
     
         <div class='side'>
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cifra10-dl"><span class="toc-number">1.</span> <span class="toc-text">cifra10_dl</span></a></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%BD%92%E4%B8%80%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">图片数据归一化处理</span></a></li></ol>	
         </div>
     
 </div>
