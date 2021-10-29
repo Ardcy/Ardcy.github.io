@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>计算机网络——应用层笔记 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="第六章 应用层考纲内容：
+一，网络应用模型
+客户/服务器模型：P2P模型
+二、域名系统DNS
+层次域名空间；域名服务器；域名解析过程
+三、文件传送协议FTP
+FTP协议的工作原理；控制连接和数据连接,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    
+<div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">计算机网络——应用层笔记</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">计算机网络——应用层笔记</h1>
+        <div class="stuff">
+            <span>十月 14, 2021</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h1><p>考纲内容：</p>
+<p>一，网络应用模型</p>
+<p>客户/服务器模型：P2P模型</p>
+<p>二、域名系统DNS</p>
+<p>层次域名空间；域名服务器；域名解析过程</p>
+<p>三、文件传送协议FTP</p>
+<p>FTP协议的工作原理；控制连接和数据连接</p>
+<p>四、电子邮件EMAIL</p>
+<p>电子邮件系统的组成结构；电子邮件格式与MIME；SMTP协议与POP3协议</p>
+<p>五、万维网WWW</p>
+<p>WWW的概念与组成结构；HTTP协议</p>
+<h2 id="6-1-网络应用模型"><a href="#6-1-网络应用模型" class="headerlink" title="6.1 网络应用模型"></a>6.1 网络应用模型</h2><h3 id="6-1-1-客户-服务器模型"><a href="#6-1-1-客户-服务器模型" class="headerlink" title="6.1.1 客户/服务器模型"></a>6.1.1 客户/服务器模型</h3><p>在客户/服务器模型中，有一个总是打开的主机称为服务器，它服务于许多来自其他称为客户机的主机请求。其工作流程是：</p>
+<ol>
+<li>服务器处于接受请求的状态。</li>
+<li>客户机发出服务请求，并等待接受结果。</li>
+<li>服务器收到请求后，分析请求，进行必要的处理，得到结果并发送给客户机。</li>
+</ol>
+<p>服务器程序不需要直到客户程序的地址。</p>
+<p>客户/服务器模型的主要特点还有：</p>
+<ol>
+<li>网络中各计算机地位不平等。服务器可以通过对用户权限的限制来达到管理客户机的目的，使它们不能随意存储/删除数据，或进行其他有限的网络活动。整个网络的管理工作由少数服务器担当，故网络的管理非常集中和方便。</li>
+<li>客户机之间不直接通信。</li>
+<li>可扩展性不佳。受服务器硬件和网络带宽的限制，服务器支持的客户机数有限。</li>
+</ol>
+<h3 id="6-1-2-P2P模型"><a href="#6-1-2-P2P模型" class="headerlink" title="6.1.2 P2P模型"></a>6.1.2 P2P模型</h3><p>P2P的思想是整个网络中的传输内容不再被保存在中心服务器上，每个结点都同时具有下载、上传的功能，其权利和义务都是大体对等的。</p>
+<p>P2P模型的优点主要体现在：</p>
+<ol>
+<li><p>减轻了服务器的计算压力，消除了对某个服务器的完全依赖，可以将任务分配到各个结点上，因此大大提高了系统效率和资源利用率。</p>
+</li>
+<li><p>多个客户机之间可以直接共享文档。</p>
+</li>
+<li><p>可扩展性好，传统服务器有响应和带宽的限制，因此只能接受一定数量的请求。</p>
+</li>
+<li><p>网络健壮性强，单个结点的失效也不会影响其他部分的结点。</p>
+</li>
+</ol>
+<p>P2P模型也有缺点，在获取服务的同时，还要给其他结点提供服务，因此会占用较多的内存，影响整机速度。</p>
+<p>使网络变的拥塞，因此各大ISP通常都对P2P持反对态度。</p>
+<h2 id="6-2-DNS-系统"><a href="#6-2-DNS-系统" class="headerlink" title="6.2 DNS 系统"></a>6.2 DNS 系统</h2><p>域名系统DNS（Domain Name System)是因特网使用的命名系统，用来把便于人们记忆的含有特定含义的主机名转换称便于机器处理的IP地址。DNS系统采用客户/服务器模型，其协议运行在UDP之上，使用53号端口。</p>
+<p>从概念上可将DNS分为3个部分：层次域名空间、域名服务器和解析器。</p>
+<h3 id="6-2-1-层次域名空间"><a href="#6-2-1-层次域名空间" class="headerlink" title="6.2.1 层次域名空间"></a>6.2.1 层次域名空间</h3><p>任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名。域是名字空间中一个可被管理的划分。域还可分为子域，顶级域，二级域，三级域等等。</p>
+<h3 id="6-2-2-域名服务器"><a href="#6-2-2-域名服务器" class="headerlink" title="6.2.2 域名服务器"></a>6.2.2 域名服务器</h3><h4 id="1-根域名服务器"><a href="#1-根域名服务器" class="headerlink" title="1. 根域名服务器"></a>1. 根域名服务器</h4><h4 id="2-顶级域名服务器"><a href="#2-顶级域名服务器" class="headerlink" title="2. 顶级域名服务器"></a>2. 顶级域名服务器</h4><h4 id="3-授权域名服务器"><a href="#3-授权域名服务器" class="headerlink" title="3. 授权域名服务器"></a>3. 授权域名服务器</h4><h4 id="4-本地域名服务器"><a href="#4-本地域名服务器" class="headerlink" title="4. 本地域名服务器"></a>4. 本地域名服务器</h4><h3 id="6-2-3-域名解析过程"><a href="#6-2-3-域名解析过程" class="headerlink" title="6.2.3 域名解析过程"></a>6.2.3 域名解析过程</h3><p>域名解析是指把域名映射成为IP地址或把IP地址映射为域名的过程。前者称为正向解析，后者称为反向解析。</p>
+<h2 id="6-3-文件传输协议FTP"><a href="#6-3-文件传输协议FTP" class="headerlink" title="6.3 文件传输协议FTP"></a>6.3 文件传输协议FTP</h2><h3 id="6-3-1-FTP的工作原理"><a href="#6-3-1-FTP的工作原理" class="headerlink" title="6.3.1 FTP的工作原理"></a>6.3.1 FTP的工作原理</h3><p>文件传输协议FTP是因特网上使用最广泛的文件传送协议。FTP提供交互式的访问，允许客户指明文件的类型和格式，并允许文件具有存取权限。它屏蔽了各计算机系统的细节，因而适合于在异构网络中任意计算机之间传送文件。</p>
+<p>FTP提供以下功能：</p>
+<ol>
+<li>提供不同种类主机系统（硬、软件体系都可不同）之间的文件传输能力。</li>
+<li>以用户权限管理的方式提供用户对远程FTP服务器上的文件管理能力。</li>
+<li>以匿名FTP的方式提供公用文件共享的能力。</li>
+<li>FTP采用客户/服务器的工作方式，它使用TCP可靠的传输服务。</li>
+</ol>
+<p>FTP的服务器主要由两大部分组成：一个主进程，负责接受新的请求；另外由若干个从属进程，负责处理单个请求。其工作步骤如下：</p>
+<ol>
+<li>打开熟知端口21，使客户进程能够连上</li>
+<li>等待客户进程发连接请求</li>
+<li>启动从属进程来处理客户进程发来的请求。主进程与从属进程并发执行，从属进程对客户进程的请求处理完毕后即终止。</li>
+<li>回到等待状态，继续接受其他客户进程的请求。</li>
+</ol>
+<h3 id="6-3-2-控制连接与数据连接"><a href="#6-3-2-控制连接与数据连接" class="headerlink" title="6.3.2 控制连接与数据连接"></a>6.3.2 控制连接与数据连接</h3><p>FTP在工作时使用两个并行的TCP连接，一个是控制连接（端口号21）,一个是数据连接（端口号20）。使用两个不同的端口号可使协议更加简单和更容易实现。</p>
+<h4 id="1-控制连接"><a href="#1-控制连接" class="headerlink" title="1. 控制连接"></a>1. 控制连接</h4><h4 id="2-数据连接"><a href="#2-数据连接" class="headerlink" title="2. 数据连接"></a>2. 数据连接</h4><h2 id="6-4-电子邮件"><a href="#6-4-电子邮件" class="headerlink" title="6.4 电子邮件"></a>6.4 电子邮件</h2><h3 id="6-4-1-电子邮件系统的组成结构"><a href="#6-4-1-电子邮件系统的组成结构" class="headerlink" title="6.4.1 电子邮件系统的组成结构"></a>6.4.1 电子邮件系统的组成结构</h3><p>电子邮件系统应具有三个最主要的组成构件，分别是用户代理，邮件服务器和电子邮件使用的协议，如SMTP，POP3(或IMAP)等。</p>
+<p>下面简单地介绍下电子邮件的收发过程。</p>
+<ol>
+<li>发信人调用用户代理来撰写和编辑要发送的邮件。用户代理用SMTP协议把邮件传送给发送方邮件服务器。</li>
+<li>发送方邮件服务器将邮件放入邮件缓存队列中，等待发送。</li>
+<li>运行在发送方邮件放入邮件缓存队列中，等待发送。</li>
+<li>TCP连接建立后，SMTP客户进程开始向原程的SMTP服务器进程发送邮件。当所有的待发送邮件发完了，SMTP就关闭所建立的TCP连接。</li>
+<li>运行在接收方邮件服务器的SMTP服务器进程收到邮件后，将邮件放入收信人的用户邮箱中，等待收信人在方便时进行读取。</li>
+<li>收信人在打算收信时，调用用户代理，使用POP3(IMAP)协议将自己的邮件从接收方邮件服务器的用户邮箱中的取回。</li>
+</ol>
+<h3 id="6-4-2-电子邮件格式与MIME"><a href="#6-4-2-电子邮件格式与MIME" class="headerlink" title="6.4.2 电子邮件格式与MIME"></a>6.4.2 电子邮件格式与MIME</h3><h4 id="1-电子邮件格式"><a href="#1-电子邮件格式" class="headerlink" title="1. 电子邮件格式"></a>1. 电子邮件格式</h4><h4 id="2-MIME（多用途网际邮件扩充）"><a href="#2-MIME（多用途网际邮件扩充）" class="headerlink" title="2. MIME（多用途网际邮件扩充）"></a>2. MIME（多用途网际邮件扩充）</h4><h3 id="6-4-3-SMTP协议和POP3协议"><a href="#6-4-3-SMTP协议和POP3协议" class="headerlink" title="6.4.3 SMTP协议和POP3协议"></a>6.4.3 SMTP协议和POP3协议</h3><h2 id="6-5-万维网WWW"><a href="#6-5-万维网WWW" class="headerlink" title="6.5 万维网WWW"></a>6.5 万维网WWW</h2><h3 id="6-5-1-概念和组成结构"><a href="#6-5-1-概念和组成结构" class="headerlink" title="6.5.1 概念和组成结构"></a>6.5.1 概念和组成结构</h3><p>万维网的内核部分是由三个标准构成的：</p>
+<ol>
+<li>统一资源定位符（URL），负责标识万维网上的各种文档，并使每个文档在整个万维网的范围内具有唯一的标识符URL。</li>
+<li>超文本传输协议（HTTP），它是一个应用层协议，使用TCP连接进行可靠的传输，HTTP是万维网客户程序和服务器程序之间交互所必须遵守的协议。</li>
+<li>超文本标记语言（HTML）是一种文档结构的标记语言，使用一些约定的标记对页面上的各种信息（包括文字、声音、图像、视频等）、格式进行描述。</li>
+</ol>
+<p>万维网以客户/服务器方式工作。浏览器是在用户计算机上的万维网客户程序，而万维网文档所驻留的计算机则运行服务器程序，这个计算机称万维网服务器。客户程序向服务器程序法处请求，服务器程序向客户程序送回客户所要的文档。</p>
+<h3 id="6-5-2-超文本传输协议HTTP"><a href="#6-5-2-超文本传输协议HTTP" class="headerlink" title="6.5.2 超文本传输协议HTTP"></a>6.5.2 超文本传输协议HTTP</h3>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='bbbcedd212fd8db72b81'
+        data-cs='54e10030c2e765a96c0649f988acef2bf6a400f9'
+        data-r='comment'
+        data-o='Ardcy'
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.</span> <span class="toc-text">第六章 应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">6.1 网络应用模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-1-%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">6.1.1 客户&#x2F;服务器模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-2-P2P%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">6.1.2 P2P模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-DNS-%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">6.2 DNS 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-%E5%B1%82%E6%AC%A1%E5%9F%9F%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.1.</span> <span class="toc-text">6.2.1 层次域名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2-%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">6.2.2 域名服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%B9%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1. 根域名服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2. 顶级域名服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%8E%88%E6%9D%83%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3. 授权域名服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%9C%AC%E5%9C%B0%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">4. 本地域名服务器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-3-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">6.2.3 域名解析过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AEFTP"><span class="toc-number">1.3.</span> <span class="toc-text">6.3 文件传输协议FTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-FTP%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">6.3.1 FTP的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-%E6%8E%A7%E5%88%B6%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.2.</span> <span class="toc-text">6.3.2 控制连接与数据连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8E%A7%E5%88%B6%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">1. 控制连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">2. 数据连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">6.4 电子邮件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-1-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.</span> <span class="toc-text">6.4.1 电子邮件系统的组成结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-2-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%A0%BC%E5%BC%8F%E4%B8%8EMIME"><span class="toc-number">1.4.2.</span> <span class="toc-text">6.4.2 电子邮件格式与MIME</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">1. 电子邮件格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MIME%EF%BC%88%E5%A4%9A%E7%94%A8%E9%80%94%E7%BD%91%E9%99%85%E9%82%AE%E4%BB%B6%E6%89%A9%E5%85%85%EF%BC%89"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">2. MIME（多用途网际邮件扩充）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-3-SMTP%E5%8D%8F%E8%AE%AE%E5%92%8CPOP3%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.4.3.</span> <span class="toc-text">6.4.3 SMTP协议和POP3协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-%E4%B8%87%E7%BB%B4%E7%BD%91WWW"><span class="toc-number">1.5.</span> <span class="toc-text">6.5 万维网WWW</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-1-%E6%A6%82%E5%BF%B5%E5%92%8C%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.1.</span> <span class="toc-text">6.5.1 概念和组成结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-2-%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AEHTTP"><span class="toc-number">1.5.2.</span> <span class="toc-text">6.5.2 超文本传输协议HTTP</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
